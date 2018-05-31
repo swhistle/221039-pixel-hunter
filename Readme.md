@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Свистунов](https://up.htmlacademy.ru/ecmascript/5/user/221039).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Фидельман](https://up.htmlacademy.ru/ecmascript/5/user/773165).
 
 ---
 
