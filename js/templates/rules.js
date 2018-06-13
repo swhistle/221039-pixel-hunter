@@ -1,7 +1,8 @@
 import {getElementFromTemplate, showScreen} from '../functions';
 import game1 from './game1';
 
-const moduleRules = getElementFromTemplate(`
+const rules = () => {
+  const moduleRules = getElementFromTemplate(`
   <header class="header">
     <div class="header__back">
       <button class="back">
@@ -38,21 +39,20 @@ const moduleRules = getElementFromTemplate(`
   </footer>
 `);
 
-const link = moduleRules.getElementsByClassName(`rules__button`)[0];
-const input = moduleRules.getElementsByClassName(`rules__input`)[0];
-const form = moduleRules.getElementsByClassName(`rules__form`)[0];
+  showScreen(moduleRules);
 
-input.addEventListener(`input`, () => {
-  if (input.value.trim().length > 0) {
-    link.disabled = false;
-  } else {
-    link.disabled = true;
-  }
-});
+  const link = moduleRules.querySelector(`.rules__button`);
+  const input = moduleRules.querySelector(`.rules__input`);
+  const form = moduleRules.querySelector(`.rules__form`);
 
-form.addEventListener(`submit`, (event) => {
-  event.preventDefault();
-  showScreen(game1);
-});
+  input.addEventListener(`input`, () => {
+    link.disabled = !input.value.trim().length;
+  });
 
-export default moduleRules;
+  form.addEventListener(`submit`, (event) => {
+    event.preventDefault();
+    showScreen(game1);
+  });
+};
+
+export default rules;

@@ -72,33 +72,29 @@ const moduleGame1 = getElementFromTemplate(`
 const answers1 = moduleGame1.querySelectorAll(`input[name="question1"]`);
 const answers2 = moduleGame1.querySelectorAll(`input[name="question2"]`);
 
-let AmountAnswers1 = 0;
-let AmountAnswers2 = 0;
+let amountAnswers1 = 0;
+let amountAnswers2 = 0;
 
-answers1.forEach((radio) => {
-  radio.addEventListener(`change`, () => {
-    if (radio.checked) {
-      AmountAnswers1 = 1;
+const answersHandler = (control, amountAnswers, ...sumAnswers) => {
+  control.addEventListener(`change`, () => {
+    if (control.checked) {
+      amountAnswers = 1;
 
-      if (AmountAnswers1 + AmountAnswers2 > 1) {
+      if (amountAnswers + sumAnswers > 1) {
         showScreen(game2);
-        AmountAnswers1 = AmountAnswers2 = 0;
+
+        amountAnswers = 0;
+        sumAnswers.forEach((item) => {
+          if (typeof item === `number`) {
+            item = 0;
+          }
+        });
       }
     }
   });
-});
+};
 
-answers2.forEach((radio) => {
-  radio.addEventListener(`change`, () => {
-    if (radio.checked) {
-      AmountAnswers2 = 1;
-
-      if (AmountAnswers1 + AmountAnswers2 > 1) {
-        showScreen(game2);
-        AmountAnswers1 = AmountAnswers2 = 0;
-      }
-    }
-  });
-});
+answers1.forEach((radio) => answersHandler(radio, amountAnswers1, amountAnswers2));
+answers2.forEach((radio) => answersHandler(radio, amountAnswers2, amountAnswers1));
 
 export default moduleGame1;

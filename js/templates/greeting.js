@@ -1,4 +1,4 @@
-import {getElementFromTemplate, showScreen} from '../functions';
+import {getElementFromTemplate} from '../functions';
 import rules from './rules';
 
 const moduleGreeting = getElementFromTemplate(`
@@ -27,7 +27,7 @@ const moduleGreeting = getElementFromTemplate(`
   </footer>
 `);
 
-const link = moduleGreeting.getElementsByClassName(`greeting__continue`)[0];
-link.addEventListener(`click`, () => showScreen(rules));
+const link = moduleGreeting.querySelector(`.greeting__continue`);
+link.addEventListener(`click`, () => rules());
 
 export default moduleGreeting;
