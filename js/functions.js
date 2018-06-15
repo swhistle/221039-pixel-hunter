@@ -8,7 +8,9 @@ const container = document.querySelector(`.central`);
 
 const showScreen = (screen) => {
   container.innerHTML = ``;
-  container.appendChild(screen);
+  Array.prototype.forEach.call(screen.children, (item) => {
+    container.appendChild(item.cloneNode(true));
+  });
 };
 
-export {getElementFromTemplate, showScreen};
+export {getElementFromTemplate, showScreen, container};

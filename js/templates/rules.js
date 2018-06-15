@@ -1,8 +1,8 @@
-import {getElementFromTemplate, showScreen} from '../functions';
+import {getElementFromTemplate, showScreen, container} from '../functions';
 import game1 from './game1';
 
-const rules = () => {
-  const moduleRules = getElementFromTemplate(`
+const moduleRules = () => {
+  const rules = getElementFromTemplate(`
   <header class="header">
     <div class="header__back">
       <button class="back">
@@ -39,11 +39,11 @@ const rules = () => {
   </footer>
 `);
 
-  showScreen(moduleRules);
+  showScreen(rules);
 
-  const link = moduleRules.querySelector(`.rules__button`);
-  const input = moduleRules.querySelector(`.rules__input`);
-  const form = moduleRules.querySelector(`.rules__form`);
+  const link = container.querySelector(`.rules__button`);
+  const input = container.querySelector(`.rules__input`);
+  const form = container.querySelector(`.rules__form`);
 
   input.addEventListener(`input`, () => {
     link.disabled = !input.value.trim().length;
@@ -51,8 +51,8 @@ const rules = () => {
 
   form.addEventListener(`submit`, (event) => {
     event.preventDefault();
-    showScreen(game1);
+    game1();
   });
 };
 
-export default rules;
+export default moduleRules;

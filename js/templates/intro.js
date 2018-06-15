@@ -1,7 +1,8 @@
-import {getElementFromTemplate, showScreen} from '../functions';
+import {getElementFromTemplate, showScreen, container} from '../functions';
 import greeting from './greeting';
 
-const moduleIntro = getElementFromTemplate(`
+const moduleIntro = () => {
+  const intro = getElementFromTemplate(`
   <div id="main" class="central__content">
     <div id="intro" class="intro">
       <h1 class="intro__asterisk">*</h1>
@@ -20,7 +21,10 @@ const moduleIntro = getElementFromTemplate(`
   </footer>
 `);
 
-const link = moduleIntro.querySelector(`.intro__asterisk`);
-link.addEventListener(`click`, () => showScreen(greeting));
+  showScreen(intro);
+
+  const link = container.querySelector(`.intro__asterisk`);
+  link.addEventListener(`click`, () => greeting());
+};
 
 export default moduleIntro;
