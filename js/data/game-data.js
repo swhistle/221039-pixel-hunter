@@ -1,6 +1,12 @@
+const RULES = {
+  levels: 10,
+  levelDuration: 30,
+  roomToFail: 3
+};
+
 const INITIAL_GAME_DATA = {
   lives: 3,
-  time: 30,
+  time: RULES.levelDuration,
   scores: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
 
@@ -40,4 +46,4 @@ const runTimer = (updates = 0, startTime = currentTime) => {
   return timerObject;
 };
 
-export {calculateScoredPoints, runTimer};
+export {RULES, INITIAL_GAME_DATA, calculateScoredPoints, runTimer};

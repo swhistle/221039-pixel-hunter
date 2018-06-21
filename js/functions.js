@@ -4,7 +4,15 @@ const getElementFromTemplate = (content) => {
   return elem;
 };
 
+const header = document.querySelector(`.header`);
 const container = document.querySelector(`.central`);
+
+const showHeader = (headerElement) => {
+  header.innerHTML = ``;
+  Array.prototype.forEach.call(headerElement.children, (item) => {
+    header.appendChild(item.cloneNode(true));
+  });
+};
 
 const showScreen = (screen) => {
   container.innerHTML = ``;
@@ -13,4 +21,4 @@ const showScreen = (screen) => {
   });
 };
 
-export {getElementFromTemplate, showScreen, container};
+export {getElementFromTemplate, showScreen, showHeader, container, header};
