@@ -7,12 +7,26 @@ const RULES = {
 const INITIAL_GAME_DATA = {
   lives: 3,
   time: RULES.levelDuration,
-  scores: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  scores: []
 };
 
 let currentLives = INITIAL_GAME_DATA.lives;
 let currentTime = INITIAL_GAME_DATA.time;
 let currentScores = INITIAL_GAME_DATA.scores;
+
+const gameState = {
+  lives: currentLives,
+  scores: currentScores
+};
+
+const answerCorrectly = () => {
+  gameState.scores.push(100);
+};
+
+const answerWrong = () => {
+  gameState.lives--;
+  gameState.scores.push(0);
+};
 
 const calculateScoredPoints = (arrayScores = currentScores, lives = currentLives) => {
   const lostLevels = [];
@@ -46,4 +60,4 @@ const runTimer = (updates = 0, startTime = currentTime) => {
   return timerObject;
 };
 
-export {RULES, INITIAL_GAME_DATA, calculateScoredPoints, runTimer};
+export {RULES, INITIAL_GAME_DATA, gameState, answerCorrectly, answerWrong, calculateScoredPoints, runTimer};
