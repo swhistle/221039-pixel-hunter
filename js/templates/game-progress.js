@@ -18,6 +18,7 @@ const moduleGameProgress = () => {
       </div>
 `);
 
+  /** TODO придумать более изящное решение **/
   container.after(gameProgressTemplate.firstElementChild);
 };
 

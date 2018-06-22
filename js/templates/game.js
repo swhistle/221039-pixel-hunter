@@ -2,23 +2,23 @@ import {getElementFromTemplate, showScreen, container} from '../functions';
 import gameCurrentState from './game-state';
 import gameProgress from './game-progress';
 import {LEVELS, ANSWER_TYPE, TASK_TYPE} from '../data/levels';
-import {gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
-import stats from './stats';
+import {GAME_RESULT, gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
+import result from './result';
 
 const moduleGame = (level) => {
   /** TODO удалить console.log **/
-  console.log(gameStateObject);
+  // console.log(gameStateObject);
 
   /** GAME OVER! **/
   if (gameStateObject.lives === 0) {
     /** Выходим из игрового экрана и показываем экран статистики **/
-    stats();
+    result(GAME_RESULT.loss);
     return;
   }
 
   /** Победа в игре и переход к экрану статистики! **/
   if (level.type === null) {
-    stats();
+    result(GAME_RESULT.victory);
     return;
   }
 
