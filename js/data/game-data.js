@@ -14,18 +14,24 @@ let currentLives = INITIAL_GAME_DATA.lives;
 let currentTime = INITIAL_GAME_DATA.time;
 let currentScores = INITIAL_GAME_DATA.scores;
 
-const gameState = {
+const gameStateObject = {
   lives: currentLives,
   scores: currentScores
 };
 
 const answerCorrectly = () => {
-  gameState.scores.push(100);
+  gameStateObject.scores.push(100);
 };
 
 const answerWrong = () => {
-  gameState.lives--;
-  gameState.scores.push(0);
+  gameStateObject.lives--;
+  gameStateObject.scores.push(0);
+};
+
+/** Начинаем игру заново, то есть приводим объект состояния игры к исходному **/
+const startNewGame = () => {
+  gameStateObject.lives = INITIAL_GAME_DATA.lives;
+  gameStateObject.scores.splice(0, gameStateObject.scores.length);
 };
 
 const calculateScoredPoints = (arrayScores = currentScores, lives = currentLives) => {
@@ -60,4 +66,4 @@ const runTimer = (updates = 0, startTime = currentTime) => {
   return timerObject;
 };
 
-export {RULES, INITIAL_GAME_DATA, gameState, answerCorrectly, answerWrong, calculateScoredPoints, runTimer};
+export {RULES, INITIAL_GAME_DATA, gameStateObject, answerCorrectly, answerWrong, startNewGame, calculateScoredPoints, runTimer};

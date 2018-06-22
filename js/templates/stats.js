@@ -104,7 +104,7 @@ const moduleStats = () => {
     </div>
   `);
 
-  container.nextElementSibling.remove();
+  // container.nextElementSibling.remove();
   showScreen(stats);
 };
 

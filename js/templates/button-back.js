@@ -1,4 +1,4 @@
-import {getElementFromTemplate, showHeader} from '../functions';
+import {getElementFromTemplate, header} from '../functions';
 
 const moduleButtonBack = () => {
   const buttonBackTemplate = getElementFromTemplate(`
@@ -10,7 +10,7 @@ const moduleButtonBack = () => {
     </div>
 `);
 
-  showHeader(buttonBackTemplate);
+  header.appendChild(buttonBackTemplate);
 };
 
 export default moduleButtonBack;

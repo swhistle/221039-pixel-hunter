@@ -85,7 +85,7 @@ const LEVELS = {
     answers: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        value: ANSWER_TYPE.painting
+        value: ANSWER_TYPE.photo
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
@@ -109,7 +109,7 @@ const LEVELS = {
     answers: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        value: ANSWER_TYPE.painting
+        value: ANSWER_TYPE.photo
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
@@ -117,7 +117,7 @@ const LEVELS = {
       },
       {
         src: `https://k32.kn3.net/5C7060EC5.jpg`,
-        value: ANSWER_TYPE.photo
+        value: ANSWER_TYPE.painting
       }
     ],
     nextLevel: `level-9`
@@ -148,7 +148,10 @@ const LEVELS = {
         value: ANSWER_TYPE.photo
       }
     ],
-    nextLevel: `level-10`
+    nextLevel: `finish-game`
+  },
+  'finish-game': {
+    type: null
   }
 };
 

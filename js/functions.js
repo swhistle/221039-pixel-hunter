@@ -4,13 +4,20 @@ const getElementFromTemplate = (content) => {
   return elem;
 };
 
-const header = document.querySelector(`.header`);
 const container = document.querySelector(`.central`);
+const header = document.querySelector(`.header`);
 
-const showHeader = (headerElement) => {
-  header.innerHTML = ``;
-  Array.prototype.forEach.call(headerElement.children, (item) => {
-    header.appendChild(item.cloneNode(true));
+const initGameStateContainer = () => {
+  const headerGameStateContainer = document.createElement(`div`);
+  headerGameStateContainer.classList.add(`header-game-state`);
+  header.appendChild(headerGameStateContainer);
+};
+
+const renderGameState = (state) => {
+  const headerGameState = document.querySelector(`.header .header-game-state`);
+  headerGameState.innerHTML = ``;
+  Array.prototype.forEach.call(state.children, (item) => {
+    headerGameState.appendChild(item.cloneNode(true));
   });
 };
 
@@ -21,4 +28,4 @@ const showScreen = (screen) => {
   });
 };
 
-export {getElementFromTemplate, showScreen, showHeader, container, header};
+export {getElementFromTemplate, showScreen, renderGameState, container, header, initGameStateContainer};

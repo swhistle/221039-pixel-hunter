@@ -2,16 +2,33 @@ import {getElementFromTemplate, showScreen, container} from '../functions';
 import gameCurrentState from './game-state';
 import gameProgress from './game-progress';
 import {LEVELS, ANSWER_TYPE, TASK_TYPE} from '../data/levels';
-import {gameState, answerCorrectly, answerWrong} from "../data/game-data";
+import {gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
+import stats from './stats';
 
 const moduleGame = (level) => {
+  /** TODO удалить console.log **/
+  console.log(gameStateObject);
+
+  /** GAME OVER! **/
+  if (gameStateObject.lives === 0) {
+    /** Выходим из игрового экрана и показываем экран статистики **/
+    stats();
+    return;
+  }
+
+  /** Победа в игре и переход к экрану статистики! **/
+  if (level.type === null) {
+    stats();
+    return;
+  }
+
+  /** TODO динамическое отображение игрового прогресса  **/
   /** Отрисовываем только при запуске 1-го уровня **/
   if (level === LEVELS[`level-1`]) {
-    gameCurrentState();
     gameProgress();
   }
 
-  console.log(gameState);
+  gameCurrentState();
 
   switch (level.type) {
     case TASK_TYPE.twoPaintingsOrPhotos:
@@ -142,7 +159,7 @@ const moduleGame = (level) => {
 
       answers3.forEach((item, index) => {
         item.addEventListener(`click`, () => {
-          if (level.answers[index].value === ANSWER_TYPE.paint) {
+          if (level.answers[index].value === ANSWER_TYPE.painting) {
             answerCorrectly();
           } else {
             answerWrong();

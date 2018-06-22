@@ -1,5 +1,6 @@
 import {getElementFromTemplate, showScreen, container, header} from '../functions';
 import rules from './rules';
+import {startNewGame} from "../data/game-data";
 
 const moduleGreeting = () => {
   const greeting = getElementFromTemplate(`
@@ -20,6 +21,7 @@ const moduleGreeting = () => {
 
   header.innerHTML = ``;
   showScreen(greeting);
+  startNewGame();
 
   const link = container.querySelector(`.greeting__continue`);
   link.addEventListener(`click`, () => rules());

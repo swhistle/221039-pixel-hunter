@@ -1,4 +1,4 @@
-import {getElementFromTemplate, showScreen, container} from '../functions';
+import {getElementFromTemplate, showScreen, container, initGameStateContainer} from '../functions';
 import game from './game';
 import buttonBack from './button-back';
 import {RULES} from "../data/game-data";
@@ -25,6 +25,7 @@ const moduleRules = () => {
   `);
 
   buttonBack();
+  initGameStateContainer();
   showScreen(rules);
 
   const link = container.querySelector(`.rules__button`);
