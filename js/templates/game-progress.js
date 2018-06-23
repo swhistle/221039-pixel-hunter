@@ -1,25 +1,39 @@
-import {getElementFromTemplate, container} from '../functions';
+import {getElementFromTemplate, renderGameProgress} from '../functions';
+import {gameStateObject} from '../data/game-data';
+import {AMOUNT_LEVELS} from "../data/levels";
 
-const moduleGameProgress = () => {
-  const gameProgressTemplate = getElementFromTemplate(`
-    <div class="stats">
-        <ul class="stats">
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--correct"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--unknown"></li>
-        </ul>
-      </div>
-`);
+const showGameProgress = () => {
+  return gameStateObject.scores.map((levelResult) => {
+    switch (levelResult) {
+      case 0:
+        return `<li class="stats__result stats__result&#45;&#45;wrong"></li>`;
 
-  /** TODO придумать более изящное решение **/
-  container.after(gameProgressTemplate.firstElementChild);
+      case 50:
+        return `<li class="stats__result stats__result&#45;&#45;slow"></li>`;
+
+      case 100:
+        return `<li class="stats__result stats__result&#45;&#45;correct">`;
+
+      case 150:
+        return `<li class="stats__result stats__result&#45;&#45;fast"></li>`;
+
+      default:
+        return null;
+    }
+  }).join(``);
 };
 
-export default moduleGameProgress;
+const moduleGameProgress = () => {
+  const gameProgress = getElementFromTemplate(`
+        <ul class="stats">
+          ${showGameProgress()}
+          ${new Array(AMOUNT_LEVELS - gameStateObject.scores.length)
+          .fill(`<li class="stats__result stats__result&#45;&#45;unknown"></li>`).join(``)}
+        </ul>
+      
+`);
+
+  renderGameProgress(gameProgress);
+};
+
+export {moduleGameProgress, showGameProgress};

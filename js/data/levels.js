@@ -155,4 +155,14 @@ const LEVELS = {
   }
 };
 
-export {LEVELS, ANSWER_TYPE, TASK_TYPE};
+let LevelCounter = 0;
+
+for (const key in LEVELS) {
+  if (key !== `finish-game`) {
+    LevelCounter++;
+  }
+}
+
+const AMOUNT_LEVELS = LevelCounter;
+
+export {LEVELS, ANSWER_TYPE, TASK_TYPE, AMOUNT_LEVELS};

@@ -1,6 +1,6 @@
 import {getElementFromTemplate, showScreen, container} from '../functions';
 import gameCurrentState from './game-state';
-import gameProgress from './game-progress';
+import {moduleGameProgress as gameProgress} from './game-progress';
 import {LEVELS, ANSWER_TYPE, TASK_TYPE} from '../data/levels';
 import {GAME_RESULT, gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
 import result from './result';
@@ -22,13 +22,9 @@ const moduleGame = (level) => {
     return;
   }
 
-  /** TODO динамическое отображение игрового прогресса  **/
-  /** Отрисовываем только при запуске 1-го уровня **/
-  if (level === LEVELS[`level-1`]) {
-    gameProgress();
-  }
-
   gameCurrentState();
+
+  gameProgress();
 
   switch (level.type) {
     case TASK_TYPE.twoPaintingsOrPhotos:

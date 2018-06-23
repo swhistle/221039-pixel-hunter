@@ -1,4 +1,4 @@
-import {getElementFromTemplate, showScreen, container, header} from '../functions';
+import {getElementFromTemplate, showScreen, container, header, removeGameProgressContainer} from '../functions';
 import rules from './rules';
 import {startNewGame} from "../data/game-data";
 
@@ -21,6 +21,7 @@ const moduleGreeting = () => {
 
   header.innerHTML = ``;
   showScreen(greeting);
+  removeGameProgressContainer();
   startNewGame();
 
   const link = container.querySelector(`.greeting__continue`);

@@ -21,6 +21,27 @@ const renderGameState = (state) => {
   });
 };
 
+const initGameProgressContainer = () => {
+  const gameProgressContainer = document.createElement(`div`);
+  gameProgressContainer.classList.add(`stats`);
+  container.after(gameProgressContainer);
+};
+
+const renderGameProgress = (gameProgress) => {
+  const progressContainer = document.querySelector(`.stats`);
+  progressContainer.innerHTML = ``;
+  Array.prototype.forEach.call(gameProgress.children, (item) => {
+    progressContainer.appendChild(item.cloneNode(true));
+  });
+};
+
+const removeGameProgressContainer = () => {
+  const progressContainer = document.querySelector(`.stats`);
+  if (progressContainer) {
+    progressContainer.remove();
+  }
+};
+
 const showScreen = (screen) => {
   container.innerHTML = ``;
   Array.prototype.forEach.call(screen.children, (item) => {
@@ -28,4 +49,14 @@ const showScreen = (screen) => {
   });
 };
 
-export {getElementFromTemplate, showScreen, renderGameState, container, header, initGameStateContainer};
+export {
+  getElementFromTemplate,
+  showScreen,
+  renderGameState,
+  renderGameProgress,
+  container,
+  header,
+  initGameStateContainer,
+  initGameProgressContainer,
+  removeGameProgressContainer
+};

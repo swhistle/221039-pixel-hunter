@@ -1,6 +1,8 @@
 import {getElementFromTemplate, showScreen, container} from '../functions';
 import {GAME_RESULT, SCORE, gameStateObject, calculateScoredPoints} from "../data/game-data";
 import gameCurrentState from './game-state';
+import {showGameProgress} from "./game-progress";
+import {AMOUNT_LEVELS} from "../data/levels";
 
 const moduleResult = (result) => {
   gameCurrentState();
@@ -13,19 +15,12 @@ const moduleResult = (result) => {
           <h1>Победа!</h1>
           <table class="result__table">
             <tr>
-              <td colspan="1">
+              <td colspan="2">
                 <ul class="stats">
-                  <li class="stats__result stats__result--wrong"></li>
-                  <li class="stats__result stats__result--slow"></li>
-                  <li class="stats__result stats__result--fast"></li>
-                  <li class="stats__result stats__result--correct"></li>
-                  <li class="stats__result stats__result--wrong"></li>
-                  <li class="stats__result stats__result--unknown"></li>
-                  <li class="stats__result stats__result--slow"></li>
-                  <li class="stats__result stats__result--unknown"></li>
-                  <li class="stats__result stats__result--fast"></li>
-                  <li class="stats__result stats__result--unknown"></li>
-                </ul>
+                  ${showGameProgress()}
+                  ${new Array(AMOUNT_LEVELS - gameStateObject.scores.length)
+                  .fill(`<li class="stats__result stats__result--unknown"></li>`).join(``)}
+                 </ul>
               </td>
               <td class="result__points">×&nbsp;${SCORE.correctAnswer}</td>
               <td class="result__total">
@@ -61,16 +56,9 @@ const moduleResult = (result) => {
             <tr>
               <td>
                 <ul class="stats">
-                  <li class="stats__result stats__result--wrong"></li>
-                  <li class="stats__result stats__result--slow"></li>
-                  <li class="stats__result stats__result--fast"></li>
-                  <li class="stats__result stats__result--correct"></li>
-                  <li class="stats__result stats__result--wrong"></li>
-                  <li class="stats__result stats__result--unknown"></li>
-                  <li class="stats__result stats__result--slow"></li>
-                  <li class="stats__result stats__result--wrong"></li>
-                  <li class="stats__result stats__result--fast"></li>
-                  <li class="stats__result stats__result--wrong"></li>
+                  ${showGameProgress()}
+                  ${new Array(AMOUNT_LEVELS - gameStateObject.scores.length)
+                  .fill(`<li class="stats__result stats__result--unknown"></li>`).join(``)}
                 </ul>
               </td>
               <td class="result__total"></td>
