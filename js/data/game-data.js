@@ -1,13 +1,15 @@
-const RULES = {
-  levels: 10,
-  levelDuration: 30,
-  roomToFail: 3
-};
+import {AMOUNT_LEVELS} from "./levels";
 
 const INITIAL_GAME_DATA = {
   lives: 3,
-  time: RULES.levelDuration,
+  time: 30,
   scores: []
+};
+
+const RULES = {
+  levels: AMOUNT_LEVELS,
+  levelDuration: INITIAL_GAME_DATA.time,
+  roomToFail: INITIAL_GAME_DATA.lives
 };
 
 const GAME_RESULT = {
@@ -19,7 +21,8 @@ const SCORE = {
   correctAnswer: 100,
   fastAnswer: 150,
   slowAnswer: 50,
-  remainingLives: 50,
+  wrongAnswer: 0,
+  remainingLives: 50
 };
 
 
@@ -34,12 +37,12 @@ const gameStateObject = {
 
 /** Функции **/
 const answerCorrectly = () => {
-  gameStateObject.scores.push(100);
+  gameStateObject.scores.push(SCORE.correctAnswer);
 };
 
 const answerWrong = () => {
   gameStateObject.lives--;
-  gameStateObject.scores.push(0);
+  gameStateObject.scores.push(SCORE.wrongAnswer);
 };
 
 /** Начинаем игру заново, то есть приводим объект состояния игры к исходному **/
@@ -78,4 +81,15 @@ const runTimer = (updates = 0, startTime = currentTime) => {
   return timerObject;
 };
 
-export {RULES, INITIAL_GAME_DATA, GAME_RESULT, SCORE, gameStateObject, answerCorrectly, answerWrong, startNewGame, calculateScoredPoints, runTimer};
+export {
+  RULES,
+  INITIAL_GAME_DATA,
+  GAME_RESULT,
+  SCORE,
+  gameStateObject,
+  answerCorrectly,
+  answerWrong,
+  startNewGame,
+  calculateScoredPoints,
+  runTimer
+};
