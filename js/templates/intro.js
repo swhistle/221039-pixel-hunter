@@ -6,6 +6,7 @@ const moduleIntro = () => {
   const intro = new IntroView();
 
   showScreen(intro.element);
+  console.log(intro.element);
 
   intro.onChangeScreen = () => greeting();
 };
