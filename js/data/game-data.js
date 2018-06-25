@@ -1,28 +1,71 @@
-const INITIAL_GAME_DATA = {
-  lives: 3,
-  time: 30,
-  scores: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+import {AMOUNT_LEVELS} from "./levels";
+
+const InitialGameData = {
+  LIVES: 3,
+  TIME: 30,
+  SCORES: []
 };
 
-let currentLives = INITIAL_GAME_DATA.lives;
-let currentTime = INITIAL_GAME_DATA.time;
-let currentScores = INITIAL_GAME_DATA.scores;
+const Rules = {
+  LEVELS: AMOUNT_LEVELS,
+  LEVEL_DURATION: InitialGameData.TIME,
+  ROOM_TO_FAIL: InitialGameData.LIVES
+};
 
-const calculateScoredPoints = (arrayScores = currentScores, lives = currentLives) => {
-  const lostLevels = [];
-  let sum = 0;
-  arrayScores.forEach((level) => {
-    if (level === 0) {
-      lostLevels.push(level);
-    } else {
-      sum = sum + level;
-    }
-  });
+const GameResult = {
+  VICTORY: `victory`,
+  LOSS: `loss`
+};
 
-  if (lostLevels.length >= 4) {
-    return -1;
+const Score = {
+  CORRECT_ANSWER: 100,
+  FAST_ANSWER: 150,
+  SLOW_ANSWER: 50,
+  WRONG_ANSWER: 0,
+  REMAINING_LIVES: 50
+};
+
+
+let currentLives = InitialGameData.LIVES;
+let currentTime = InitialGameData.TIME;
+let currentScores = InitialGameData.SCORES;
+
+const gameStateObject = {
+  lives: currentLives,
+  scores: currentScores
+};
+
+/** Функции **/
+const answerCorrectly = () => {
+  gameStateObject.scores.push(Score.CORRECT_ANSWER);
+};
+
+const answerWrong = () => {
+  gameStateObject.lives--;
+  gameStateObject.scores.push(Score.WRONG_ANSWER);
+};
+
+/** Начинаем игру заново, то есть приводим объект состояния игры к исходному **/
+const startNewGame = () => {
+  gameStateObject.lives = InitialGameData.LIVES;
+  gameStateObject.scores.splice(0, gameStateObject.scores.length);
+};
+
+const sumArray = (array, initialValue = 0) => {
+  return array.reduce((sum, currentItem) => {
+    return sum + currentItem;
+  }, initialValue);
+};
+
+const calculateScoredPoints = (arrayScores, lives) => {
+  if (arrayScores !== undefined && lives !== undefined) {
+    return sumArray(arrayScores) + lives * Score.REMAINING_LIVES;
+  } else if (lives === undefined) {
+    return sumArray(arrayScores);
+  } else if (arrayScores === undefined) {
+    return lives * Score.REMAINING_LIVES;
   } else {
-    return sum + lives * 50;
+    return null;
   }
 };
 
@@ -40,4 +83,15 @@ const runTimer = (updates = 0, startTime = currentTime) => {
   return timerObject;
 };
 
-export {calculateScoredPoints, runTimer};
+export {
+  Rules,
+  InitialGameData,
+  GameResult,
+  Score,
+  gameStateObject,
+  answerCorrectly,
+  answerWrong,
+  startNewGame,
+  calculateScoredPoints,
+  runTimer
+};

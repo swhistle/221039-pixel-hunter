@@ -2,14 +2,6 @@ import {assert} from 'chai';
 import {calculateScoredPoints, runTimer} from "./game-data";
 
 describe(`calculateScoredPoints`, () => {
-  it(`should return -1 - game over`, () => {
-    assert.equal(-1, calculateScoredPoints(undefined, 0));
-  });
-
-  it(`should return -1 - game over`, () => {
-    assert.equal(-1, calculateScoredPoints([0, 0, 0, 150, 50, 150, 150, 100, 50, 0], 0));
-  });
-
   it(`should return 350 - min score`, () => {
     assert.equal(350, calculateScoredPoints([50, 50, 50, 50, 50, 50, 50, 0, 0, 0], 0));
   });
@@ -23,11 +15,11 @@ describe(`calculateScoredPoints`, () => {
   });
 
   it(`should return 1150 score`, () => {
-    assert.equal(1150, calculateScoredPoints([100, 100, 100, 100, 100, 100, 100, 100, 100, 100]));
+    assert.equal(1150, calculateScoredPoints([100, 100, 100, 100, 100, 100, 100, 100, 100, 100], 3));
   });
 
   it(`should return 1650 - max score!`, () => {
-    assert.equal(1650, calculateScoredPoints([150, 150, 150, 150, 150, 150, 150, 150, 150, 150]));
+    assert.equal(1650, calculateScoredPoints([150, 150, 150, 150, 150, 150, 150, 150, 150, 150], 3));
   });
 });
 
