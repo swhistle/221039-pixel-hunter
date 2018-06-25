@@ -16,10 +16,17 @@ export default class IntroView extends AbstractView {
     `;
   }
 
+  onChangeScreen() {}
+
   bind() {
-    this.element.onclick = (evt) => {
-      evt.preventDefault();
-      this.onClick();
-    };
+    const link = this.element.querySelector(`.intro__asterisk`);
+    link.addEventListener(`click`, (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+
+      this.onChangeScreen();
+    });
   }
+
+
 }
