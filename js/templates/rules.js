@@ -1,19 +1,19 @@
 import {getElementFromTemplate, showScreen, container, initGameStateContainer, initGameProgressContainer} from '../functions';
 import game from './game';
 import buttonBack from './button-back';
-import {RULES} from "../data/game-data";
+import {Rules} from "../data/game-data";
 import {LEVELS} from "../data/levels";
 
 const moduleRules = () => {
   const rules = getElementFromTemplate(`
     <div class="rules">
       <h1 class="rules__title">Правила</h1>
-      <p class="rules__description">Угадай ${RULES.levels} раз для каждого изображения фото <img
+      <p class="rules__description">Угадай ${Rules.LEVELS} раз для каждого изображения фото <img
         src="img/photo_icon.png" width="16" height="16"> или рисунок <img
         src="img/paint_icon.png" width="16" height="16" alt="">.<br>
         Фотографиями или рисунками могут быть оба изображения.<br>
-        На каждую попытку отводится ${RULES.levelDuration} секунд.<br>
-        Ошибиться можно не более ${RULES.roomToFail} раз.<br>
+        На каждую попытку отводится ${Rules.LEVEL_DURATION} секунд.<br>
+        Ошибиться можно не более ${Rules.ROOM_TO_FAIL} раз.<br>
         <br>
         Готовы?
       </p>

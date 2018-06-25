@@ -1,5 +1,5 @@
 import {getElementFromTemplate, showScreen, container} from '../functions';
-import {GAME_RESULT, SCORE, gameStateObject, calculateScoredPoints} from "../data/game-data";
+import {GameResult, Score, gameStateObject, calculateScoredPoints} from "../data/game-data";
 import gameCurrentState from './game-state';
 import {showGameProgress} from "./game-progress";
 import {AMOUNT_LEVELS} from "../data/levels";
@@ -9,7 +9,7 @@ const moduleResult = (result) => {
 
   switch (result) {
     /** ПОБЕДА! **/
-    case GAME_RESULT.victory:
+    case GameResult.VICTORY:
       const statistics = getElementFromTemplate(`
         <div class="result">
           <h1>Победа!</h1>
@@ -22,7 +22,7 @@ const moduleResult = (result) => {
                   .fill(`<li class="stats__result stats__result--unknown"></li>`).join(``)}
                  </ul>
               </td>
-              <td class="result__points">×&nbsp;${SCORE.correctAnswer}</td>
+              <td class="result__points">×&nbsp;${Score.CORRECT_ANSWER}</td>
               <td class="result__total">
                 ${calculateScoredPoints(gameStateObject.scores)}
             </td>
@@ -31,7 +31,7 @@ const moduleResult = (result) => {
             <tr>
               <td class="result__extra">Бонус за жизни:</td>
               <td class="result__extra">${gameStateObject.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
-              <td class="result__points">×&nbsp;${SCORE.remainingLives}</td>
+              <td class="result__points">×&nbsp;${Score.REMAINING_LIVES}</td>
               <td class="result__total">${calculateScoredPoints(undefined, gameStateObject.lives)}</td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@ const moduleResult = (result) => {
       break;
 
     /** Поражение... **/
-    case GAME_RESULT.loss:
+    case GameResult.LOSS:
 
       const screenLoss = getElementFromTemplate(`
         <div class="result">

@@ -1,20 +1,20 @@
 import {getElementFromTemplate, renderGameProgress} from '../functions';
-import {gameStateObject, SCORE} from '../data/game-data';
+import {gameStateObject, Score} from '../data/game-data';
 import {AMOUNT_LEVELS} from "../data/levels";
 
 const showGameProgress = () => {
   return gameStateObject.scores.map((levelResult) => {
     switch (levelResult) {
-      case SCORE.wrongAnswer:
+      case Score.WRONG_ANSWER:
         return `<li class="stats__result stats__result--wrong"></li>`;
 
-      case SCORE.slowAnswer:
+      case Score.SLOW_ANSWER:
         return `<li class="stats__result stats__result--slow"></li>`;
 
-      case SCORE.correctAnswer:
+      case Score.CORRECT_ANSWER:
         return `<li class="stats__result stats__result--correct">`;
 
-      case SCORE.fastAnswer:
+      case Score.FAST_ANSWER:
         return `<li class="stats__result stats__result--fast"></li>`;
 
       default:

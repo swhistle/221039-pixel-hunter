@@ -1,8 +1,8 @@
 import {getElementFromTemplate, showScreen, container} from '../functions';
 import gameCurrentState from './game-state';
 import {moduleGameProgress as gameProgress} from './game-progress';
-import {LEVELS, ANSWER_TYPE, TASK_TYPE} from '../data/levels';
-import {GAME_RESULT, gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
+import {LEVELS, AnswerType, TaskType} from '../data/levels';
+import {GameResult, gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
 import result from './result';
 
 const moduleGame = (level) => {
@@ -12,13 +12,13 @@ const moduleGame = (level) => {
   /** GAME OVER! **/
   if (gameStateObject.lives === 0) {
     /** Выходим из игрового экрана и показываем экран статистики **/
-    result(GAME_RESULT.loss);
+    result(GameResult.LOSS);
     return;
   }
 
   /** Победа в игре и переход к экрану статистики! **/
   if (level.type === null) {
-    result(GAME_RESULT.victory);
+    result(GameResult.VICTORY);
     return;
   }
 
@@ -27,7 +27,7 @@ const moduleGame = (level) => {
   gameProgress();
 
   switch (level.type) {
-    case TASK_TYPE.twoPaintingsOrPhotos:
+    case TaskType.TWO_PAINTINGS_OR_PHOTOS:
       const game1 = getElementFromTemplate(`
         <div class="game">
           <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
@@ -92,7 +92,7 @@ const moduleGame = (level) => {
 
       break;
 
-    case TASK_TYPE.paintingOrPhoto:
+    case TaskType.PAINTING_OR_PHOTO:
       const game2 = getElementFromTemplate(`
         <div class="game">
           <p class="game__task">Угадай, фото или рисунок?</p>
@@ -131,7 +131,7 @@ const moduleGame = (level) => {
 
       break;
 
-    case TASK_TYPE.onePaintingOfThreeImages:
+    case TaskType.ONE_PAINTING_OF_THREE_IMAGES:
       const game3 = getElementFromTemplate(`
         <div class="game">
           <p class="game__task">Найдите рисунок среди изображений</p>
@@ -155,7 +155,7 @@ const moduleGame = (level) => {
 
       answers3.forEach((item, index) => {
         item.addEventListener(`click`, () => {
-          if (level.answers[index].value === ANSWER_TYPE.painting) {
+          if (level.answers[index].value === AnswerType.PAINTING) {
             answerCorrectly();
           } else {
             answerWrong();

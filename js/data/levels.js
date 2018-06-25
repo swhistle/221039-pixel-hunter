@@ -1,151 +1,151 @@
-const TASK_TYPE = {
-  twoPaintingsOrPhotos: `twoPaintingsOrPhotos`,
-  paintingOrPhoto: `paintingOrPhoto`,
-  onePaintingOfThreeImages: `onePaintingOfThreeImages`
+const TaskType = {
+  TWO_PAINTINGS_OR_PHOTOS: `twoPaintingsOrPhotos`,
+  PAINTING_OR_PHOTO: `paintingOrPhoto`,
+  ONE_PAINTING_OF_THREE_IMAGES: `onePaintingOfThreeImages`
 };
 
-const ANSWER_TYPE = {
-  painting: `paint`,
-  photo: `photo`
+const AnswerType = {
+  PAINTING: `paint`,
+  PHOTO: `photo`
 };
 
 const LEVELS = {
   'level-1': {
-    type: TASK_TYPE.twoPaintingsOrPhotos,
+    type: TaskType.TWO_PAINTINGS_OR_PHOTOS,
     answers: [
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       }
     ],
     nextLevel: `level-2`
   },
   'level-2': {
-    type: TASK_TYPE.paintingOrPhoto,
+    type: TaskType.PAINTING_OR_PHOTO,
     answers: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       }
     ],
     nextLevel: `level-3`
   },
   'level-3': {
-    type: TASK_TYPE.onePaintingOfThreeImages,
+    type: TaskType.ONE_PAINTING_OF_THREE_IMAGES,
     answers: [
       {
         src: `https://k32.kn3.net/5C7060EC5.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       },
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       }
     ],
     nextLevel: `level-4`
   },
   'level-4': {
-    type: TASK_TYPE.onePaintingOfThreeImages,
+    type: TaskType.ONE_PAINTING_OF_THREE_IMAGES,
     answers: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       },
       {
         src: `http://i.imgur.com/DKR1HtB.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       }
     ],
     nextLevel: `level-5`
   },
   'level-5': {
-    type: TASK_TYPE.paintingOrPhoto,
+    type: TaskType.PAINTING_OR_PHOTO,
     answers: [
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       }
     ],
     nextLevel: `level-6`
   },
   'level-6': {
-    type: TASK_TYPE.twoPaintingsOrPhotos,
+    type: TaskType.TWO_PAINTINGS_OR_PHOTOS,
     answers: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       },
     ],
     nextLevel: `level-7`
   },
   'level-7': {
-    type: TASK_TYPE.paintingOrPhoto,
+    type: TaskType.PAINTING_OR_PHOTO,
     answers: [
       {
         src: `https://k32.kn3.net/5C7060EC5.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       }
     ],
     nextLevel: `level-8`
   },
   'level-8': {
-    type: TASK_TYPE.onePaintingOfThreeImages,
+    type: TaskType.ONE_PAINTING_OF_THREE_IMAGES,
     answers: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       },
       {
         src: `https://k32.kn3.net/5C7060EC5.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       }
     ],
     nextLevel: `level-9`
   },
   'level-9': {
-    type: TASK_TYPE.onePaintingOfThreeImages,
+    type: TaskType.ONE_PAINTING_OF_THREE_IMAGES,
     answers: [
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
-        value: ANSWER_TYPE.painting
+        value: AnswerType.PAINTING
       },
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       }
     ],
     nextLevel: `level-10`
   },
   'level-10': {
-    type: TASK_TYPE.paintingOrPhoto,
+    type: TaskType.PAINTING_OR_PHOTO,
     answers: [
       {
         src: `http://i.imgur.com/DKR1HtB.jpg`,
-        value: ANSWER_TYPE.photo
+        value: AnswerType.PHOTO
       }
     ],
     nextLevel: `finish-game`
@@ -155,14 +155,14 @@ const LEVELS = {
   }
 };
 
-let LevelCounter = 0;
+let levelCounter = 0;
 
 for (const key in LEVELS) {
   if (key !== `finish-game`) {
-    LevelCounter++;
+    levelCounter++;
   }
 }
 
-const AMOUNT_LEVELS = LevelCounter;
+const AMOUNT_LEVELS = levelCounter;
 
-export {LEVELS, ANSWER_TYPE, TASK_TYPE, AMOUNT_LEVELS};
+export {LEVELS, AnswerType, TaskType, AMOUNT_LEVELS};
