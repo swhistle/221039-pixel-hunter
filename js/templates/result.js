@@ -1,16 +1,13 @@
 import ResultView from '../view/result-view';
-import {showScreen, container} from '../functions';
-import gameCurrentState from './game-state';
+import {showScreen, removeGameProgressContainer, removeGameStateContainer} from '../functions';
 
 const moduleResult = () => {
-  gameCurrentState();
+  removeGameProgressContainer();
+  removeGameStateContainer();
 
   const result = new ResultView();
 
   showScreen(result.element);
-
-  /** TODO убрать хардкорное удаление блока с игровым прогрессом **/
-  container.nextElementSibling.remove();
 };
 
 export default moduleResult;

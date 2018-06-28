@@ -12,23 +12,6 @@ const moduleRules = () => {
   initGameProgressContainer();
   showScreen(rules.element);
 
-  rules.bind = () => {
-    const link = document.querySelector(`.rules__button`);
-    const input = document.querySelector(`.rules__input`);
-    const form = document.querySelector(`.rules__form`);
-
-    input.addEventListener(`input`, () => {
-      link.disabled = !input.value.trim().length;
-    });
-
-    form.addEventListener(`submit`, (event) => {
-      event.preventDefault();
-      rules.onChangeScreen();
-    });
-  };
-
-  rules.bind();
-
   rules.onChangeScreen = () => game(LEVELS[`level-1`]);
 };
 

@@ -21,6 +21,13 @@ const renderGameState = (state) => {
   });
 };
 
+const removeGameStateContainer = () => {
+  const gameStateContainer = document.querySelector(`.header .header-game-state`);
+  if (gameStateContainer) {
+    gameStateContainer.remove();
+  }
+};
+
 const initGameProgressContainer = () => {
   const gameProgressContainer = document.createElement(`div`);
   gameProgressContainer.classList.add(`stats`);
@@ -44,19 +51,18 @@ const removeGameProgressContainer = () => {
 
 const showScreen = (screen) => {
   container.innerHTML = ``;
-  Array.prototype.forEach.call(screen.children, (item) => {
-    container.appendChild(item.cloneNode(true));
-  });
+  container.appendChild(screen);
 };
 
 export {
   getElementFromTemplate,
   showScreen,
+  initGameStateContainer,
   renderGameState,
+  removeGameStateContainer,
+  initGameProgressContainer,
   renderGameProgress,
+  removeGameProgressContainer,
   container,
   header,
-  initGameStateContainer,
-  initGameProgressContainer,
-  removeGameProgressContainer
 };

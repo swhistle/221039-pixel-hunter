@@ -7,15 +7,6 @@ const moduleIntro = () => {
 
   showScreen(intro.element);
 
-  intro.bind = () => {
-    const link = document.querySelector(`.intro__asterisk`);
-    link.addEventListener(`click`, () => {
-      intro.onChangeScreen();
-    });
-  };
-
-  intro.bind();
-
   intro.onChangeScreen = () => greeting();
 };
 

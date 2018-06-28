@@ -11,15 +11,6 @@ const moduleGreeting = () => {
   removeGameProgressContainer();
   startNewGame();
 
-  greeting.bind = () => {
-    const link = document.querySelector(`.greeting__continue`);
-    link.addEventListener(`click`, () => {
-      greeting.onChangeScreen();
-    });
-  };
-
-  greeting.bind();
-
   greeting.onChangeScreen = () => rules();
 };
 

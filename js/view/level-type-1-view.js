@@ -1,4 +1,5 @@
 import AbstractView from './abstract-view';
+import {answerCorrectly, answerWrong} from "../data/game-data";
 
 export default class LevelType1View extends AbstractView {
   constructor(level) {
@@ -39,7 +40,35 @@ export default class LevelType1View extends AbstractView {
   }
 
   bind() {
+    const answers = this.element.querySelectorAll(`input[name="question1"], input[name="question2"]`);
 
+    answers.forEach((item) => {
+      item.addEventListener(`change`, () => {
+        let amountAnswers = 0;
+        let amountCorrectAnswers = 0;
+        answers.forEach((radio, index) => {
+          amountAnswers = amountAnswers + +radio.checked;
+          if (radio.checked) {
+            /** Вычисляем номер изображения, на которм был 'нажат' инпут **/
+            const indexImage = Math.floor(index / 2);
+            if (radio.value === this.level.answers[indexImage].value) {
+              amountCorrectAnswers++;
+            }
+          }
+
+          if (amountAnswers > 1) {
+            if (amountCorrectAnswers > 1) {
+              answerCorrectly();
+            } else {
+              answerWrong();
+            }
+            amountAnswers = 0;
+            amountCorrectAnswers = 0;
+            this.onChangeScreen();
+          }
+        });
+      });
+    });
   }
 
   onChangeScreen() {}

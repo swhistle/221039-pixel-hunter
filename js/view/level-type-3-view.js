@@ -1,4 +1,6 @@
 import AbstractView from './abstract-view';
+import {ANSWER_TYPE} from '../data/levels';
+import {answerCorrectly, answerWrong} from "../data/game-data";
 
 export default class LevelType3View extends AbstractView {
   constructor(level) {
@@ -26,6 +28,18 @@ export default class LevelType3View extends AbstractView {
   }
 
   bind() {
+    const answers = this.element.querySelectorAll(`.game__option`);
+
+    answers.forEach((item, index) => {
+      item.addEventListener(`click`, () => {
+        if (this.level.answers[index].value === ANSWER_TYPE.painting) {
+          answerCorrectly();
+        } else {
+          answerWrong();
+        }
+        this.onChangeScreen();
+      });
+    });
 
   }
 

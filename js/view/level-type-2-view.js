@@ -1,4 +1,5 @@
 import AbstractView from './abstract-view';
+import {answerCorrectly, answerWrong} from "../data/game-data";
 
 export default class LevelType2View extends AbstractView {
   constructor(level) {
@@ -28,7 +29,20 @@ export default class LevelType2View extends AbstractView {
   }
 
   bind() {
+    const answers = this.element.querySelectorAll(`input[name="question1"]`);
 
+    answers.forEach((radio) => {
+      radio.addEventListener(`change`, () => {
+        if (radio.checked) {
+          if (radio.value === this.level.answers[0].value) {
+            answerCorrectly();
+          } else {
+            answerWrong();
+          }
+          this.onChangeScreen();
+        }
+      });
+    });
   }
 
   onChangeScreen() {}
