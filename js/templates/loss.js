@@ -1,16 +1,16 @@
-import ResultView from '../view/result-view';
+import LossView from '../view/loss-view';
 import {showScreen, container} from '../functions';
 import gameCurrentState from './game-state';
 
-const moduleResult = () => {
+const moduleLoss = () => {
   gameCurrentState();
 
-  const result = new ResultView();
+  const loss = new LossView();
 
-  showScreen(result.element);
+  showScreen(loss.element);
 
   /** TODO убрать хардкорное удаление блока с игровым прогрессом **/
   container.nextElementSibling.remove();
 };
 
-export default moduleResult;
+export default moduleLoss;

@@ -1,9 +1,13 @@
-import {getElementFromTemplate, showScreen, container} from '../functions';
+import LevelType1View from '../view/level-type-1-view';
+import LevelType2View from '../view/level-type-2-view';
+import LevelType3View from '../view/level-type-3-view';
+import {showScreen} from '../functions';
 import gameCurrentState from './game-state';
 import {moduleGameProgress as gameProgress} from './game-progress';
 import {LEVELS, ANSWER_TYPE, TASK_TYPE} from '../data/levels';
-import {GAME_RESULT, gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
+import {gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
 import result from './result';
+import loss from './loss';
 
 const moduleGame = (level) => {
   /** TODO удалить console.log **/
@@ -12,13 +16,13 @@ const moduleGame = (level) => {
   /** GAME OVER! **/
   if (gameStateObject.lives === 0) {
     /** Выходим из игрового экрана и показываем экран статистики **/
-    result(GAME_RESULT.loss);
+    loss();
     return;
   }
 
   /** Победа в игре и переход к экрану статистики! **/
   if (level.type === null) {
-    result(GAME_RESULT.victory);
+    result();
     return;
   }
 
@@ -28,141 +32,99 @@ const moduleGame = (level) => {
 
   switch (level.type) {
     case TASK_TYPE.twoPaintingsOrPhotos:
-      const game1 = getElementFromTemplate(`
-        <div class="game">
-          <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
-          <form class="game__content">
-            <div class="game__option">
-              <img src=${level.answers[0].src} alt="Option 1" width="468" height="458">
-              <label class="game__answer game__answer--photo">
-                <input name="question1" type="radio" value="photo">
-                <span>Фото</span>
-              </label>
-              <label class="game__answer game__answer--paint">
-                <input name="question1" type="radio" value="paint">
-                <span>Рисунок</span>
-              </label>
-            </div>
-            <div class="game__option">
-              <img src=${level.answers[1].src} alt="Option 2" width="468" height="458">
-              <label class="game__answer  game__answer--photo">
-                <input name="question2" type="radio" value="photo">
-                <span>Фото</span>
-              </label>
-              <label class="game__answer  game__answer--paint">
-                <input name="question2" type="radio" value="paint">
-                <span>Рисунок</span>
-              </label>
-            </div>
-          </form>
-        </div>
-      `);
+      const levelType1 = new LevelType1View(level);
 
-      showScreen(game1);
+      showScreen(levelType1.element);
 
-      const answers1 = container.querySelectorAll(`input[name="question1"], input[name="question2"]`);
+      levelType1.bind = () => {
+        const answers = document.querySelectorAll(`input[name="question1"], input[name="question2"]`);
 
-      answers1.forEach((item) => {
-        item.addEventListener(`change`, () => {
-          let amountAnswers = 0;
-          let amountCorrectAnswers = 0;
-          answers1.forEach((radio, index) => {
-            amountAnswers = amountAnswers + +radio.checked;
-            if (radio.checked) {
-              /** Вычисляем номер изображения, на которм был 'нажат' инпут **/
-              const indexImage = Math.floor(index / 2);
-              if (radio.value === level.answers[indexImage].value) {
-                amountCorrectAnswers++;
+        answers.forEach((item) => {
+          item.addEventListener(`change`, () => {
+            let amountAnswers = 0;
+            let amountCorrectAnswers = 0;
+            answers.forEach((radio, index) => {
+              amountAnswers = amountAnswers + +radio.checked;
+              if (radio.checked) {
+                /** Вычисляем номер изображения, на которм был 'нажат' инпут **/
+                const indexImage = Math.floor(index / 2);
+                if (radio.value === level.answers[indexImage].value) {
+                  amountCorrectAnswers++;
+                }
               }
-            }
 
-            if (amountAnswers > 1) {
-              if (amountCorrectAnswers > 1) {
-                answerCorrectly();
-              } else {
-                answerWrong();
+              if (amountAnswers > 1) {
+                if (amountCorrectAnswers > 1) {
+                  answerCorrectly();
+                } else {
+                  answerWrong();
+                }
+                levelType1.onChangeScreen();
+                amountAnswers = 0;
+                amountCorrectAnswers = 0;
               }
-              moduleGame(LEVELS[level.nextLevel]);
-              amountAnswers = 0;
-              amountCorrectAnswers = 0;
-            }
+            });
           });
         });
-      });
+      };
+
+      levelType1.bind();
+
+      levelType1.onChangeScreen = () => moduleGame(LEVELS[level.nextLevel]);
 
       break;
 
     case TASK_TYPE.paintingOrPhoto:
-      const game2 = getElementFromTemplate(`
-        <div class="game">
-          <p class="game__task">Угадай, фото или рисунок?</p>
-          <form class="game__content  game__content--wide">
-            <div class="game__option">
-              <img src=${level.answers[0].src} alt="Option 1" width="705" height="455">
-              <label class="game__answer  game__answer--photo">
-                <input name="question1" type="radio" value="photo">
-                <span>Фото</span>
-              </label>
-              <label class="game__answer  game__answer--wide  game__answer--paint">
-                <input name="question1" type="radio" value="paint">
-                <span>Рисунок</span>
-              </label>
-            </div>
-          </form>
-        </div>
-      `);
+      const levelType2 = new LevelType2View(level);
 
-      showScreen(game2);
+      showScreen(levelType2.element);
 
-      const answers2 = container.querySelectorAll(`input[name="question1"]`);
+      levelType2.bind = () => {
+        const answers = document.querySelectorAll(`input[name="question1"]`);
 
-      answers2.forEach((radio) => {
-        radio.addEventListener(`change`, () => {
-          if (radio.checked) {
-            if (radio.value === level.answers[0].value) {
-              answerCorrectly();
-            } else {
-              answerWrong();
+        answers.forEach((radio) => {
+          radio.addEventListener(`change`, () => {
+            if (radio.checked) {
+              if (radio.value === level.answers[0].value) {
+                answerCorrectly();
+              } else {
+                answerWrong();
+              }
+              levelType2.onChangeScreen();
             }
-            moduleGame(LEVELS[level.nextLevel]);
-          }
+          });
         });
-      });
+      };
+
+      levelType2.bind();
+
+      levelType2.onChangeScreen = () => moduleGame(LEVELS[level.nextLevel]);
 
       break;
 
     case TASK_TYPE.onePaintingOfThreeImages:
-      const game3 = getElementFromTemplate(`
-        <div class="game">
-          <p class="game__task">Найдите рисунок среди изображений</p>
-          <form class="game__content  game__content--triple">
-            <div class="game__option">
-              <img src=${level.answers[0].src} alt="Option 1" width="304" height="455">
-            </div>
-            <div class="game__option  game__option--selected">
-              <img src=${level.answers[1].src} alt="Option 1" width="304" height="455">
-            </div>
-            <div class="game__option">
-              <img src=${level.answers[2].src} alt="Option 1" width="304" height="455">
-            </div>
-          </form>
-        </div>
-      `);
+      const levelType3 = new LevelType3View(level);
 
-      showScreen(game3);
+      showScreen(levelType3.element);
 
-      const answers3 = container.querySelectorAll(`.game__option`);
+      levelType3.bind = () => {
+        const answers = document.querySelectorAll(`.game__option`);
 
-      answers3.forEach((item, index) => {
-        item.addEventListener(`click`, () => {
-          if (level.answers[index].value === ANSWER_TYPE.painting) {
-            answerCorrectly();
-          } else {
-            answerWrong();
-          }
-          moduleGame(LEVELS[level.nextLevel]);
+        answers.forEach((item, index) => {
+          item.addEventListener(`click`, () => {
+            if (level.answers[index].value === ANSWER_TYPE.painting) {
+              answerCorrectly();
+            } else {
+              answerWrong();
+            }
+            levelType3.onChangeScreen();
+          });
         });
-      });
+      };
+
+      levelType3.bind();
+
+      levelType3.onChangeScreen = () => moduleGame(LEVELS[level.nextLevel]);
   }
 };
 
