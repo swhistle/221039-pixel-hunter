@@ -1,13 +1,14 @@
 import RulesView from '../view/rules-view';
-import {showScreen, initGameStateContainer, initGameProgressContainer} from '../functions';
+import {showScreen, initGameStateContainer, initGameProgressContainer, renderHeader} from '../functions';
 import game from './game';
-import buttonBack from './button-back';
+import ButtonBackView from '../view/button-back-view';
 import {LEVELS} from "../data/levels";
 
 const moduleRules = () => {
   const rules = new RulesView();
+  const buttonBack = new ButtonBackView();
 
-  buttonBack();
+  renderHeader(buttonBack.element);
   initGameStateContainer();
   initGameProgressContainer();
   showScreen(rules.element);

@@ -1,9 +1,12 @@
 import intro from './templates/intro';
 import greeting from './templates/greeting';
-import footer from './templates/footer';
+import FooterView from './view/footer-view';
+import {putAfterContainer} from "./functions";
 
 intro();
-footer();
+
+const footer = new FooterView();
+putAfterContainer(footer.element);
 
 document.addEventListener(`click`, (event) => {
   if (event.target.classList.contains(`back`) || event.target.parentNode.classList.contains(`back`)) {

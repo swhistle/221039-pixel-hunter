@@ -1,15 +1,17 @@
 import LevelType1View from '../view/level-type-1-view';
 import LevelType2View from '../view/level-type-2-view';
 import LevelType3View from '../view/level-type-3-view';
-import {showScreen} from '../functions';
-import gameCurrentState from './game-state';
-import {moduleGameProgress as gameProgress} from './game-progress';
+import {showScreen, renderGameState, renderGameProgress} from '../functions';
+import GameStateView from '../view/game-state-view';
+import GameProgressView from '../view/game-progress-view';
 import {LEVELS, TASK_TYPE} from '../data/levels';
-import {gameStateObject, answerCorrectly, answerWrong} from "../data/game-data";
+import {gameStateObject} from "../data/game-data";
 import result from './result';
 import loss from './loss';
 
 const moduleGame = (level) => {
+  const gameCurrentState = new GameStateView();
+  const gameProgress = new GameProgressView();
   /** TODO удалить console.log **/
   // console.log(gameStateObject);
 
@@ -26,9 +28,8 @@ const moduleGame = (level) => {
     return;
   }
 
-  gameCurrentState();
-
-  gameProgress();
+  renderGameState(gameCurrentState.element);
+  renderGameProgress(gameProgress.element);
 
   switch (level.type) {
     case TASK_TYPE.twoPaintingsOrPhotos:

@@ -51,6 +51,27 @@ const startNewGame = () => {
   gameStateObject.scores.splice(0, gameStateObject.scores.length);
 };
 
+const showGameProgress = () => {
+  return gameStateObject.scores.map((levelResult) => {
+    switch (levelResult) {
+      case SCORE.wrongAnswer:
+        return `<li class="stats__result stats__result--wrong"></li>`;
+
+      case SCORE.slowAnswer:
+        return `<li class="stats__result stats__result--slow"></li>`;
+
+      case SCORE.correctAnswer:
+        return `<li class="stats__result stats__result--correct">`;
+
+      case SCORE.fastAnswer:
+        return `<li class="stats__result stats__result--fast"></li>`;
+
+      default:
+        return null;
+    }
+  }).join(``);
+};
+
 const calculateScoredPoints = (arrayScores, lives) => {
   if (arrayScores && lives !== undefined) {
     return arrayScores.reduce((sumPoints, currentPoint) => {
@@ -90,6 +111,7 @@ export {
   answerCorrectly,
   answerWrong,
   startNewGame,
+  showGameProgress,
   calculateScoredPoints,
   runTimer
 };

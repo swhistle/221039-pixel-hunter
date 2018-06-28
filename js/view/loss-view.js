@@ -1,6 +1,5 @@
 import AbstractView from './abstract-view';
-import {gameStateObject} from "../data/game-data";
-import {showGameProgress} from "../templates/game-progress";
+import {gameStateObject, showGameProgress} from "../data/game-data";
 import {AMOUNT_LEVELS} from "../data/levels";
 
 export default class RulesView extends AbstractView {
