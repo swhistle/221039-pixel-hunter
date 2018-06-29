@@ -3,7 +3,8 @@ import {AMOUNT_LEVELS} from "./levels";
 const INITIAL_GAME_DATA = {
   lives: 3,
   time: 30,
-  scores: []
+  scores: [],
+  userName: ''
 };
 
 const RULES = {
@@ -32,7 +33,8 @@ let currentScores = INITIAL_GAME_DATA.scores;
 
 const gameStateObject = {
   lives: currentLives,
-  scores: currentScores
+  scores: currentScores,
+  userName: INITIAL_GAME_DATA.userName
 };
 
 /** Функции **/
@@ -46,9 +48,10 @@ const answerWrong = () => {
 };
 
 /** Начинаем игру заново, то есть приводим объект состояния игры к исходному **/
-const startNewGame = () => {
+const startNewGame = (name) => {
   gameStateObject.lives = INITIAL_GAME_DATA.lives;
   gameStateObject.scores.splice(0, gameStateObject.scores.length);
+  gameStateObject.userName = name;
 };
 
 const showGameProgress = () => {

@@ -33,6 +33,7 @@ export default class RulesView extends AbstractView {
     const form = this.element.querySelector(`.rules__form`);
 
     input.addEventListener(`input`, () => {
+      this.name = input.value.trim();
       link.disabled = !input.value.trim().length;
     });
 

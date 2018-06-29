@@ -23,8 +23,9 @@ export default class GameModel {
     this._gameState.scores.push(SCORE.wrongAnswer);
   }
 
-  startNewGame() {
+  startNewGame(name) {
     this._gameState.lives = INITIAL_GAME_DATA.lives;
     this._gameState.scores.splice(0, gameStateObject.scores.length);
+    this._gameState.userName = name;
   }
 }

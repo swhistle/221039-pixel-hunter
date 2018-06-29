@@ -1,9 +1,3 @@
-const getElementFromTemplate = (content) => {
-  const elem = document.createElement(`div`);
-  elem.innerHTML = content;
-  return elem;
-};
-
 const container = document.querySelector(`.central`);
 
 const renderHeader = (element) => {
@@ -64,7 +58,6 @@ const putAfterContainer = (element) => {
 };
 
 export {
-  getElementFromTemplate,
   showScreen,
   renderHeader,
   initGameStateContainer,
