@@ -5,9 +5,18 @@ const getElementFromTemplate = (content) => {
 };
 
 const container = document.querySelector(`.central`);
-const header = document.querySelector(`.header`);
+
+const renderHeader = (element) => {
+  const header = document.querySelector(`.header`);
+  header.innerHTML = ``;
+  if (element === undefined) {
+    return;
+  }
+  header.appendChild(element);
+};
 
 const initGameStateContainer = () => {
+  const header = document.querySelector(`.header`);
   const headerGameStateContainer = document.createElement(`div`);
   headerGameStateContainer.classList.add(`header-game-state`);
   header.appendChild(headerGameStateContainer);
@@ -16,9 +25,14 @@ const initGameStateContainer = () => {
 const renderGameState = (state) => {
   const headerGameState = document.querySelector(`.header .header-game-state`);
   headerGameState.innerHTML = ``;
-  Array.prototype.forEach.call(state.children, (item) => {
-    headerGameState.appendChild(item.cloneNode(true));
-  });
+  headerGameState.appendChild(state);
+};
+
+const removeGameStateContainer = () => {
+  const gameStateContainer = document.querySelector(`.header .header-game-state`);
+  if (gameStateContainer) {
+    gameStateContainer.remove();
+  }
 };
 
 const initGameProgressContainer = () => {
@@ -30,9 +44,7 @@ const initGameProgressContainer = () => {
 const renderGameProgress = (gameProgress) => {
   const progressContainer = document.querySelector(`.stats`);
   progressContainer.innerHTML = ``;
-  Array.prototype.forEach.call(gameProgress.children, (item) => {
-    progressContainer.appendChild(item.cloneNode(true));
-  });
+  progressContainer.appendChild(gameProgress);
 };
 
 const removeGameProgressContainer = () => {
@@ -44,19 +56,23 @@ const removeGameProgressContainer = () => {
 
 const showScreen = (screen) => {
   container.innerHTML = ``;
-  Array.prototype.forEach.call(screen.children, (item) => {
-    container.appendChild(item.cloneNode(true));
-  });
+  container.appendChild(screen);
+};
+
+const putAfterContainer = (element) => {
+  container.after(element);
 };
 
 export {
   getElementFromTemplate,
   showScreen,
-  renderGameState,
-  renderGameProgress,
-  container,
-  header,
+  renderHeader,
   initGameStateContainer,
+  renderGameState,
+  removeGameStateContainer,
   initGameProgressContainer,
-  removeGameProgressContainer
+  renderGameProgress,
+  removeGameProgressContainer,
+  container,
+  putAfterContainer
 };

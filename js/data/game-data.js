@@ -25,7 +25,6 @@ const Score = {
   REMAINING_LIVES: 50
 };
 
-
 let currentLives = InitialGameData.LIVES;
 let currentTime = InitialGameData.TIME;
 let currentScores = InitialGameData.SCORES;
@@ -35,7 +34,7 @@ const gameStateObject = {
   scores: currentScores
 };
 
-/** Функции **/
+/* Функции */
 const answerCorrectly = () => {
   gameStateObject.scores.push(Score.CORRECT_ANSWER);
 };
@@ -45,10 +44,25 @@ const answerWrong = () => {
   gameStateObject.scores.push(Score.WRONG_ANSWER);
 };
 
-/** Начинаем игру заново, то есть приводим объект состояния игры к исходному **/
+/* Начинаем игру заново, то есть приводим объект состояния игры к исходному */
 const startNewGame = () => {
   gameStateObject.lives = InitialGameData.LIVES;
   gameStateObject.scores.splice(0, gameStateObject.scores.length);
+};
+
+const showGameProgress = () => {
+  return gameStateObject.scores.map((levelResult) => {
+    if (levelResult === Score.WRONG_ANSWER) {
+      return `<li class="stats__result stats__result--wrong"></li>`;
+    } else if (levelResult === Score.SLOW_ANSWER) {
+      return `<li class="stats__result stats__result--slow"></li>`;
+    } else if (levelResult === Score.CORRECT_ANSWER) {
+      return `<li class="stats__result stats__result--correct">`;
+    } else if (levelResult === Score.FAST_ANSWER) {
+      return `<li class="stats__result stats__result--fast"></li>`;
+    }
+    return null;
+  }).join(``);
 };
 
 const sumArray = (array, initialValue = 0) => {
@@ -92,6 +106,7 @@ export {
   answerCorrectly,
   answerWrong,
   startNewGame,
+  showGameProgress,
   calculateScoredPoints,
   runTimer
 };
