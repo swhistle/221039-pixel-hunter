@@ -1,88 +1,83 @@
 import {AMOUNT_LEVELS} from "./levels";
 
-const INITIAL_GAME_DATA = {
-  lives: 3,
-  time: 30,
-  scores: []
+const InitialGameData = {
+  LIVES: 3,
+  TIME: 30,
+  SCORES: []
 };
 
-const RULES = {
-  levels: AMOUNT_LEVELS,
-  levelDuration: INITIAL_GAME_DATA.time,
-  roomToFail: INITIAL_GAME_DATA.lives
+const Rules = {
+  LEVELS: AMOUNT_LEVELS,
+  LEVEL_DURATION: InitialGameData.TIME,
+  ROOM_TO_FAIL: InitialGameData.LIVES
 };
 
-const GAME_RESULT = {
-  victory: `victory`,
-  loss: `loss`
+const GameResult = {
+  VICTORY: `victory`,
+  LOSS: `loss`
 };
 
-const SCORE = {
-  correctAnswer: 100,
-  fastAnswer: 150,
-  slowAnswer: 50,
-  wrongAnswer: 0,
-  remainingLives: 50
+const Score = {
+  CORRECT_ANSWER: 100,
+  FAST_ANSWER: 150,
+  SLOW_ANSWER: 50,
+  WRONG_ANSWER: 0,
+  REMAINING_LIVES: 50
 };
 
-
-let currentLives = INITIAL_GAME_DATA.lives;
-let currentTime = INITIAL_GAME_DATA.time;
-let currentScores = INITIAL_GAME_DATA.scores;
+let currentLives = InitialGameData.LIVES;
+let currentTime = InitialGameData.TIME;
+let currentScores = InitialGameData.SCORES;
 
 const gameStateObject = {
   lives: currentLives,
   scores: currentScores
 };
 
-/** Функции **/
+/* Функции */
 const answerCorrectly = () => {
-  gameStateObject.scores.push(SCORE.correctAnswer);
+  gameStateObject.scores.push(Score.CORRECT_ANSWER);
 };
 
 const answerWrong = () => {
   gameStateObject.lives--;
-  gameStateObject.scores.push(SCORE.wrongAnswer);
+  gameStateObject.scores.push(Score.WRONG_ANSWER);
 };
 
-/** Начинаем игру заново, то есть приводим объект состояния игры к исходному **/
+/* Начинаем игру заново, то есть приводим объект состояния игры к исходному */
 const startNewGame = () => {
-  gameStateObject.lives = INITIAL_GAME_DATA.lives;
+  gameStateObject.lives = InitialGameData.LIVES;
   gameStateObject.scores.splice(0, gameStateObject.scores.length);
 };
 
 const showGameProgress = () => {
   return gameStateObject.scores.map((levelResult) => {
-    switch (levelResult) {
-      case SCORE.wrongAnswer:
-        return `<li class="stats__result stats__result--wrong"></li>`;
-
-      case SCORE.slowAnswer:
-        return `<li class="stats__result stats__result--slow"></li>`;
-
-      case SCORE.correctAnswer:
-        return `<li class="stats__result stats__result--correct">`;
-
-      case SCORE.fastAnswer:
-        return `<li class="stats__result stats__result--fast"></li>`;
-
-      default:
-        return null;
+    if (levelResult === Score.WRONG_ANSWER) {
+      return `<li class="stats__result stats__result--wrong"></li>`;
+    } else if (levelResult === Score.SLOW_ANSWER) {
+      return `<li class="stats__result stats__result--slow"></li>`;
+    } else if (levelResult === Score.CORRECT_ANSWER) {
+      return `<li class="stats__result stats__result--correct">`;
+    } else if (levelResult === Score.FAST_ANSWER) {
+      return `<li class="stats__result stats__result--fast"></li>`;
     }
+    return null;
   }).join(``);
 };
 
+const sumArray = (array, initialValue = 0) => {
+  return array.reduce((sum, currentItem) => {
+    return sum + currentItem;
+  }, initialValue);
+};
+
 const calculateScoredPoints = (arrayScores, lives) => {
-  if (arrayScores && lives !== undefined) {
-    return arrayScores.reduce((sumPoints, currentPoint) => {
-      return sumPoints + currentPoint;
-    }, 0) + lives * SCORE.remainingLives;
+  if (arrayScores !== undefined && lives !== undefined) {
+    return sumArray(arrayScores) + lives * Score.REMAINING_LIVES;
   } else if (lives === undefined) {
-    return arrayScores.reduce((sumPoints, currentPoint) => {
-      return sumPoints + currentPoint;
-    }, 0);
+    return sumArray(arrayScores);
   } else if (arrayScores === undefined) {
-    return lives * SCORE.remainingLives;
+    return lives * Score.REMAINING_LIVES;
   } else {
     return null;
   }
@@ -103,10 +98,10 @@ const runTimer = (updates = 0, startTime = currentTime) => {
 };
 
 export {
-  RULES,
-  INITIAL_GAME_DATA,
-  GAME_RESULT,
-  SCORE,
+  Rules,
+  InitialGameData,
+  GameResult,
+  Score,
   gameStateObject,
   answerCorrectly,
   answerWrong,
