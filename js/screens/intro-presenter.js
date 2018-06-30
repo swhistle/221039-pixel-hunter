@@ -7,6 +7,6 @@ export default class IntroPresenter {
   }
 
   init() {
-    this.view.onChangeScreen = () => App.showGreeting();
+    this.view.onChangeScreen = App.showGreeting;
   }
 }

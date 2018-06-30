@@ -3,16 +3,18 @@ import LevelType2View from '../view/level-type-2-view';
 import LevelType3View from '../view/level-type-3-view';
 import GameStateView from '../view/game-state-view';
 import GameProgressView from '../view/game-progress-view';
-import {gameStateObject, GameResult} from "../data/game-data";
-import {LEVELS, TaskType} from "../data/levels";
+import {gameStateObject, GameResult} from '../data/game-data';
+import {LEVELS, TaskType} from '../data/levels';
 import App from '../app';
-import {renderGameState, renderGameProgress} from "../functions";
+import {renderGameState, renderGameProgress} from '../functions';
+import GameModel from '../model/game-model';
 
 export default class GamePresenter {
   constructor(level) {
     this.level = level;
     this.viewGameCurrentState = new GameStateView();
     this.viewGameProgress = new GameProgressView();
+    this.model = new GameModel();
   }
 
   init() {
@@ -32,25 +34,15 @@ export default class GamePresenter {
     renderGameState(this.viewGameCurrentState.element);
     renderGameProgress(this.viewGameProgress.element);
 
-    switch (this.level.type) {
-      case TaskType.TWO_PAINTINGS_OR_PHOTOS:
-        this.view = new LevelType1View(this.level);
-        App.showScreen(this.view.element);
-        this.view.onChangeScreen = () => App.showGame(LEVELS[this.level.nextLevel]);
-
-        break;
-
-      case TaskType.PAINTING_OR_PHOTO:
-        this.view = new LevelType2View(this.level);
-        App.showScreen(this.view.element);
-        this.view.onChangeScreen = () => App.showGame(LEVELS[this.level.nextLevel]);
-
-        break;
-
-      case TaskType.ONE_PAINTING_OF_THREE_IMAGES:
-        this.view = new LevelType3View(this.level);
-        App.showScreen(this.view.element);
-        this.view.onChangeScreen = () => App.showGame(LEVELS[this.level.nextLevel]);
+    if (this.level.type === TaskType.TWO_PAINTINGS_OR_PHOTOS) {
+      this.view = new LevelType1View(this.level);
+    } else if (this.level.type === TaskType.PAINTING_OR_PHOTO) {
+      this.view = new LevelType2View(this.level);
+    } else if (this.level.type === TaskType.ONE_PAINTING_OF_THREE_IMAGES) {
+      this.view = new LevelType3View(this.level);
     }
+
+    App.showScreen(this.view.element);
+    this.view.onChangeScreen = () => App.showGame(LEVELS[this.level.nextLevel]);
   }
 }

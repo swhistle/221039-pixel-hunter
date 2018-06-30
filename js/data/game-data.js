@@ -56,22 +56,16 @@ const startNewGame = (name) => {
 
 const showGameProgress = () => {
   return gameStateObject.scores.map((levelResult) => {
-    switch (levelResult) {
-      case Score.WRONG_ANSWER:
-        return `<li class="stats__result stats__result--wrong"></li>`;
-
-      case Score.SLOW_ANSWER:
-        return `<li class="stats__result stats__result--slow"></li>`;
-
-      case Score.CORRECT_ANSWER:
-        return `<li class="stats__result stats__result--correct">`;
-
-      case Score.FAST_ANSWER:
-        return `<li class="stats__result stats__result--fast"></li>`;
-
-      default:
-        return null;
+    if (levelResult === Score.WRONG_ANSWER) {
+      return `<li class="stats__result stats__result--wrong"></li>`;
+    } else if (levelResult === Score.SLOW_ANSWER) {
+      return `<li class="stats__result stats__result--slow"></li>`;
+    } else if (levelResult === Score.CORRECT_ANSWER) {
+      return `<li class="stats__result stats__result--correct">`;
+    } else if (levelResult === Score.FAST_ANSWER) {
+      return `<li class="stats__result stats__result--fast"></li>`;
     }
+    return null;
   }).join(``);
 };
 

@@ -1,4 +1,4 @@
-import {gameStateObject, SCORE, InitialGameData} from "../data/game-data";
+import {gameStateObject, Score, InitialGameData} from "../data/game-data";
 
 export default class GameModel {
   constructor(userName) {
@@ -15,12 +15,12 @@ export default class GameModel {
   }
 
   answerCorrectly() {
-    this._gameState.scores.push(SCORE.correctAnswer);
+    this._gameState.scores.push(Score.CORRECT_ANSWER);
   }
 
   answerWrong() {
     this._gameState.lives--;
-    this._gameState.scores.push(SCORE.wrongAnswer);
+    this._gameState.scores.push(Score.WRONG_ANSWER);
   }
 
   startNewGame(name) {

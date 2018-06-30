@@ -10,6 +10,6 @@ export default class GreetingPresenter {
   init() {
     renderHeader();
     removeGameProgressContainer();
-    this.view.onChangeScreen = () => App.showRules();
+    this.view.onChangeScreen = App.showRules;
   }
 }

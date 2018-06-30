@@ -12,12 +12,10 @@ export default class ResultPresenter {
     removeGameStateContainer();
     removeGameProgressContainer();
 
-    if (this.result === GameResult.LOSS) {
-      this.view = new LossView();
-    }
-
     if (this.result === GameResult.VICTORY) {
       this.view = new ResultView();
+    } else {
+      this.view = new LossView();
     }
   }
 }

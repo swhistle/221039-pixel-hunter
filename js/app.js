@@ -9,19 +9,19 @@ export default class Application {
   static showIntro() {
     const intro = new IntroPresenter();
     intro.init();
-    this.showScreen(intro.view.element);
+    Application.showScreen(intro.view.element);
   }
 
   static showGreeting() {
     const greeting = new GreetingPresenter();
     greeting.init();
-    this.showScreen(greeting.view.element);
+    Application.showScreen(greeting.view.element);
   }
 
   static showRules() {
     const rules = new RulesPresenter();
     rules.init();
-    this.showScreen(rules.view.element);
+    Application.showScreen(rules.view.element);
   }
 
   static showGame(level) {
@@ -32,7 +32,7 @@ export default class Application {
   static showResult(result) {
     const gameResult = new ResultPresenter(result);
     gameResult.init();
-    this.showScreen(gameResult.view.element);
+    Application.showScreen(gameResult.view.element);
   }
 
   static showScreen(screen) {
