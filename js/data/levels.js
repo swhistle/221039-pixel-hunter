@@ -9,6 +9,7 @@ const AnswerType = {
   PHOTO: `photo`
 };
 
+/* TODO переписать на модель */
 const LEVELS = {
   'level-1': {
     type: TaskType.TWO_PAINTINGS_OR_PHOTOS,

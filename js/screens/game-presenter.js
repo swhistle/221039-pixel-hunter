@@ -1,16 +1,17 @@
+import GameModel from '../model/game-model';
 import LevelType1View from '../view/level-type-1-view';
 import LevelType2View from '../view/level-type-2-view';
 import LevelType3View from '../view/level-type-3-view';
 import GameStateView from '../view/game-state-view';
 import GameProgressView from '../view/game-progress-view';
-import {gameStateObject, GameResult} from '../data/game-data';
+import {GameResult} from '../data/game-data';
 import {LEVELS, TaskType} from '../data/levels';
 import App from '../app';
 import {renderGameState, renderGameProgress} from '../functions';
-import GameModel from '../model/game-model';
 
 export default class GamePresenter {
   constructor(level) {
+    this.model = new GameModel();
     this.level = level;
     this.viewGameCurrentState = new GameStateView();
     this.viewGameProgress = new GameProgressView();
@@ -19,7 +20,7 @@ export default class GamePresenter {
 
   init() {
     /* GAME OVER! */
-    if (gameStateObject.lives === 0) {
+    if (this.model.getCurrentLives() === 0) {
       /* Выходим из игрового экрана и показываем экран статистики */
       App.showResult(GameResult.LOSS);
       return;
