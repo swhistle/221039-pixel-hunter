@@ -1,55 +1,55 @@
 import {AMOUNT_LEVELS} from "./levels";
 
-const INITIAL_GAME_DATA = {
-  lives: 3,
-  time: 30,
-  scores: [],
-  userName: ''
+const InitialGameData = {
+  LIVES: 3,
+  TIME: 30,
+  SCORES: [],
+  USER_NAME: ``
 };
 
-const RULES = {
-  levels: AMOUNT_LEVELS,
-  levelDuration: INITIAL_GAME_DATA.time,
-  roomToFail: INITIAL_GAME_DATA.lives
+const Rules = {
+  LEVELS: AMOUNT_LEVELS,
+  LEVEL_DURATION: InitialGameData.TIME,
+  ROOM_TO_FAIL: InitialGameData.LIVES
 };
 
-const GAME_RESULT = {
-  victory: `victory`,
-  loss: `loss`
+const GameResult = {
+  VICTORY: `victory`,
+  LOSS: `loss`
 };
 
-const SCORE = {
-  correctAnswer: 100,
-  fastAnswer: 150,
-  slowAnswer: 50,
-  wrongAnswer: 0,
-  remainingLives: 50
+const Score = {
+  CORRECT_ANSWER: 100,
+  FAST_ANSWER: 150,
+  SLOW_ANSWER: 50,
+  WRONG_ANSWER: 0,
+  REMAINING_LIVES: 50
 };
 
 
-let currentLives = INITIAL_GAME_DATA.lives;
-let currentTime = INITIAL_GAME_DATA.time;
-let currentScores = INITIAL_GAME_DATA.scores;
+let currentLives = InitialGameData.LIVES;
+let currentTime = InitialGameData.TIME;
+let currentScores = InitialGameData.SCORES;
 
 const gameStateObject = {
   lives: currentLives,
   scores: currentScores,
-  userName: INITIAL_GAME_DATA.userName
+  userName: InitialGameData.USER_NAME
 };
 
-/** Функции **/
+/* Функции */
 const answerCorrectly = () => {
-  gameStateObject.scores.push(SCORE.correctAnswer);
+  gameStateObject.scores.push(Score.CORRECT_ANSWER);
 };
 
 const answerWrong = () => {
   gameStateObject.lives--;
-  gameStateObject.scores.push(SCORE.wrongAnswer);
+  gameStateObject.scores.push(Score.WRONG_ANSWER);
 };
 
-/** Начинаем игру заново, то есть приводим объект состояния игры к исходному **/
+/* Начинаем игру заново, то есть приводим объект состояния игры к исходному */
 const startNewGame = (name) => {
-  gameStateObject.lives = INITIAL_GAME_DATA.lives;
+  gameStateObject.lives = InitialGameData.LIVES;
   gameStateObject.scores.splice(0, gameStateObject.scores.length);
   gameStateObject.userName = name;
 };
@@ -57,16 +57,16 @@ const startNewGame = (name) => {
 const showGameProgress = () => {
   return gameStateObject.scores.map((levelResult) => {
     switch (levelResult) {
-      case SCORE.wrongAnswer:
+      case Score.WRONG_ANSWER:
         return `<li class="stats__result stats__result--wrong"></li>`;
 
-      case SCORE.slowAnswer:
+      case Score.SLOW_ANSWER:
         return `<li class="stats__result stats__result--slow"></li>`;
 
-      case SCORE.correctAnswer:
+      case Score.CORRECT_ANSWER:
         return `<li class="stats__result stats__result--correct">`;
 
-      case SCORE.fastAnswer:
+      case Score.FAST_ANSWER:
         return `<li class="stats__result stats__result--fast"></li>`;
 
       default:
@@ -75,17 +75,19 @@ const showGameProgress = () => {
   }).join(``);
 };
 
+const sumArray = (array, initialValue = 0) => {
+  return array.reduce((sum, currentItem) => {
+    return sum + currentItem;
+  }, initialValue);
+};
+
 const calculateScoredPoints = (arrayScores, lives) => {
-  if (arrayScores && lives !== undefined) {
-    return arrayScores.reduce((sumPoints, currentPoint) => {
-      return sumPoints + currentPoint;
-    }, 0) + lives * SCORE.remainingLives;
+  if (arrayScores !== undefined && lives !== undefined) {
+    return sumArray(arrayScores) + lives * Score.REMAINING_LIVES;
   } else if (lives === undefined) {
-    return arrayScores.reduce((sumPoints, currentPoint) => {
-      return sumPoints + currentPoint;
-    }, 0);
+    return sumArray(arrayScores);
   } else if (arrayScores === undefined) {
-    return lives * SCORE.remainingLives;
+    return lives * Score.REMAINING_LIVES;
   } else {
     return null;
   }
@@ -106,10 +108,10 @@ const runTimer = (updates = 0, startTime = currentTime) => {
 };
 
 export {
-  RULES,
-  INITIAL_GAME_DATA,
-  GAME_RESULT,
-  SCORE,
+  Rules,
+  InitialGameData,
+  GameResult,
+  Score,
   gameStateObject,
   answerCorrectly,
   answerWrong,

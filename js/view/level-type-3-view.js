@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view';
-import {ANSWER_TYPE} from '../data/levels';
+import {AnswerType} from '../data/levels';
 import {answerCorrectly, answerWrong} from "../data/game-data";
 
 export default class LevelType3View extends AbstractView {
@@ -32,7 +32,7 @@ export default class LevelType3View extends AbstractView {
 
     answers.forEach((item, index) => {
       item.addEventListener(`click`, () => {
-        if (this.level.answers[index].value === ANSWER_TYPE.painting) {
+        if (this.level.answers[index].value === AnswerType.PAINTING) {
           answerCorrectly();
         } else {
           answerWrong();

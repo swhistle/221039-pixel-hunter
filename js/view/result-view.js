@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view';
-import {SCORE, gameStateObject, showGameProgress, calculateScoredPoints} from "../data/game-data";
+import {Score, gameStateObject, showGameProgress, calculateScoredPoints} from "../data/game-data";
 import {AMOUNT_LEVELS} from "../data/levels";
 
 export default class RulesView extends AbstractView {
@@ -20,7 +20,7 @@ export default class RulesView extends AbstractView {
                </ul>
             </td>
             <td class="result__points">×&nbsp;
-              ${SCORE.correctAnswer}
+              ${Score.CORRECT_ANSWER}
             </td>
             <td class="result__total">
               ${calculateScoredPoints(gameStateObject.scores)}
@@ -32,7 +32,7 @@ export default class RulesView extends AbstractView {
               ${gameStateObject.lives}&nbsp;<span class="stats__result stats__result--alive"></span>
             </td>
             <td class="result__points">
-              ×&nbsp;${SCORE.remainingLives}
+              ×&nbsp;${Score.REMAINING_LIVES}
             </td>
             <td class="result__total">
               ${calculateScoredPoints(undefined, gameStateObject.lives)}

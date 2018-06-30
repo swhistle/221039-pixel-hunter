@@ -1,4 +1,4 @@
-import {gameStateObject, SCORE, INITIAL_GAME_DATA} from "../data/game-data";
+import {gameStateObject, SCORE, InitialGameData} from "../data/game-data";
 
 export default class GameModel {
   constructor(userName) {
@@ -24,7 +24,7 @@ export default class GameModel {
   }
 
   startNewGame(name) {
-    this._gameState.lives = INITIAL_GAME_DATA.lives;
+    this._gameState.lives = InitialGameData.LIVES;
     this._gameState.scores.splice(0, gameStateObject.scores.length);
     this._gameState.userName = name;
   }
