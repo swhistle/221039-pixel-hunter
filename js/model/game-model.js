@@ -1,10 +1,10 @@
 import {Score} from '../data/game-data';
 import {AMOUNT_LEVELS} from '../data/levels';
+import TimerModel from '../model/timer-model';
 
 /* TODO выпилить время и добавить его в отдельную структуру с таймером */
 const InitialGameData = {
   LIVES: 3,
-  TIME: 30,
   SCORES: [],
   USER_NAME: ``
 };
@@ -22,14 +22,11 @@ export default class GameModel {
   constructor() {
     this._gameState = gameStateObject;
     this._initialGameData = InitialGameData;
+    this.timer = new TimerModel();
   }
 
   getInitialLives() {
     return this._initialGameData.LIVES;
-  }
-
-  getInitialTime() {
-    return this._initialGameData.TIME;
   }
 
   getCurrentLives() {
@@ -40,8 +37,26 @@ export default class GameModel {
     return this._gameState.scores;
   }
 
+  getFastScore() {
+    return this._gameState.scores.filter((score) => score === Score.FAST_ANSWER);
+  }
+
+  getSlowScore() {
+    return this._gameState.scores.filter((score) => score === Score.SLOW_ANSWER);
+  }
+
+  getCorrectScore() {
+    return this._gameState.scores.filter((score) => score > Score.WRONG_ANSWER);
+  }
+
   answerCorrectly() {
-    this._gameState.scores.push(Score.CORRECT_ANSWER);
+    if (this.timer.getTimeLeft() >= 20) {
+      this._gameState.scores.push(Score.FAST_ANSWER);
+    } else if (this.timer.getTimeLeft() <= 10) {
+      this._gameState.scores.push(Score.SLOW_ANSWER);
+    } else {
+      this._gameState.scores.push(Score.CORRECT_ANSWER);
+    }
   }
 
   answerWrong() {

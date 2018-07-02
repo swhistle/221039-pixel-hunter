@@ -1,11 +1,13 @@
 import AbstractView from './abstract-view';
 import GameModel from '../model/game-model';
+import TimerModel from '../model/timer-model';
 import {AMOUNT_LEVELS} from "../data/levels";
 
 export default class RulesView extends AbstractView {
   constructor() {
     super();
     this.model = new GameModel();
+    this.timer = new TimerModel();
   }
 
   get template() {
@@ -16,7 +18,7 @@ export default class RulesView extends AbstractView {
         src="img/photo_icon.png" width="16" height="16"> или рисунок <img
         src="img/paint_icon.png" width="16" height="16" alt="">.<br>
         Фотографиями или рисунками могут быть оба изображения.<br>
-        На каждую попытку отводится ${this.model.getInitialTime()} секунд.<br>
+        На каждую попытку отводится ${this.timer.getInitialTime()} секунд.<br>
         Ошибиться можно не более ${this.model.getInitialLives()} раз.<br>
         <br>
         Готовы?

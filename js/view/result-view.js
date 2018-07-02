@@ -24,8 +24,14 @@ export default class RulesView extends AbstractView {
               ${Score.CORRECT_ANSWER}
             </td>
             <td class="result__total">
-              ${calculateScoredPoints(this.model.getScore())}
+              ${this.model.getCorrectScore().length * Score.CORRECT_ANSWER}
             </td>
+          </tr>
+          <tr>
+            <td class="result__extra">Бонус за скорость:</td>
+            <td class="result__extra">${this.model.getFastScore().length}&nbsp;<span class="stats__result stats__result--fast"></span></td>
+            <td class="result__points">×&nbsp;50</td>
+            <td class="result__total">${calculateScoredPoints(this.model.getFastScore()) - this.model.getFastScore().length * Score.CORRECT_ANSWER}</td>
           </tr>
           <tr>
             <td class="result__extra">Бонус за жизни:</td>
@@ -38,6 +44,12 @@ export default class RulesView extends AbstractView {
             <td class="result__total">
               ${calculateScoredPoints(undefined, this.model.getCurrentLives())}
             </td>
+          </tr>
+          <tr>
+            <td class="result__extra">Штраф за медлительность:</td>
+            <td class="result__extra">${this.model.getSlowScore().length}&nbsp;<span class="stats__result stats__result--slow"></span></td>
+            <td class="result__points">×&nbsp;50</td>
+            <td class="result__total">-${calculateScoredPoints(this.model.getSlowScore())}</td>
           </tr>
           <tr>
             <td colspan="5" class="result__total  result__total--final">

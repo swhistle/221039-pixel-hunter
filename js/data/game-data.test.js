@@ -1,6 +1,7 @@
 import {assert} from 'chai';
 import {calculateScoredPoints, runTimer} from "./game-data";
 
+/* TODO актуализировать тесты */
 describe(`calculateScoredPoints`, () => {
   it(`should return 350 - min score`, () => {
     assert.equal(350, calculateScoredPoints([50, 50, 50, 50, 50, 50, 50, 0, 0, 0], 0));

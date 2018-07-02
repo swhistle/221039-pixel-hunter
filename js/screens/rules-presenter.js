@@ -20,5 +20,7 @@ export default class RulesPresenter {
       this.model.startNewGame(this.view.name);
       App.showGame(LEVELS[`level-1`]);
     };
+
+    this.buttonBackView.onChangeScreen = App.showGreeting;
   }
 }
