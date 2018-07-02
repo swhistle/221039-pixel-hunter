@@ -29,7 +29,6 @@ export default class TimerModel {
     }
 
     timer = setTimeout(() => {
-      console.log(`run`);
       this.tick();
       this.startTimer();
     }, ONE_SECOND);
@@ -39,7 +38,6 @@ export default class TimerModel {
     if (timer === undefined) {
       return;
     }
-    console.log(`STOP`, timeLeft);
     clearTimeout(timer);
   }
 
@@ -54,7 +52,6 @@ export default class TimerModel {
 
   tick() {
     timeLeft--;
-    console.log(timeLeft);
   }
 
   levelFailed() {

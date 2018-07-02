@@ -1,6 +1,5 @@
 import AbstractView from './abstract-view';
 import GameModel from '../model/game-model';
-import TimerModel from '../model/timer-model';
 
 export default class GameStateView extends AbstractView {
   constructor(timer) {
