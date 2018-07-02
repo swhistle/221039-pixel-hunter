@@ -1,7 +1,6 @@
 import {assert} from 'chai';
-import {calculateScoredPoints, runTimer} from "./game-data";
+import {calculateScoredPoints} from "./game-data";
 
-/* TODO актуализировать тесты */
 describe(`calculateScoredPoints`, () => {
   it(`should return 350 - min score`, () => {
     assert.equal(350, calculateScoredPoints([50, 50, 50, 50, 50, 50, 50, 0, 0, 0], 0));
@@ -21,27 +20,5 @@ describe(`calculateScoredPoints`, () => {
 
   it(`should return 1650 - max score!`, () => {
     assert.equal(1650, calculateScoredPoints([150, 150, 150, 150, 150, 150, 150, 150, 150, 150], 3));
-  });
-});
-
-describe(`runTimer`, () => {
-  it(`should return 30 seconds`, () => {
-    assert.equal(JSON.stringify({time: 30, gameOver: false}), JSON.stringify(runTimer()));
-  });
-
-  it(`should return 1 second`, () => {
-    assert.equal(JSON.stringify({time: 1, gameOver: false}), JSON.stringify(runTimer(29)));
-  });
-
-  it(`should return 0 second and game over!`, () => {
-    assert.equal(JSON.stringify({time: 0, gameOver: true}), JSON.stringify(runTimer(30)));
-  });
-
-  it(`should return 15 seconds`, () => {
-    assert.equal(JSON.stringify({time: 15, gameOver: false}), JSON.stringify(runTimer(15)));
-  });
-
-  it(`should return 10 seconds`, () => {
-    assert.equal(JSON.stringify({time: 10, gameOver: false}), JSON.stringify(runTimer(10, 20)));
   });
 });

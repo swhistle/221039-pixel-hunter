@@ -51,6 +51,10 @@ const putAfterContainer = (element) => {
   container.after(element);
 };
 
+const hideBodyOverflow = () => {
+  document.body.style.overflow = `hidden`;
+};
+
 export {
   renderHeader,
   initGameStateContainer,
@@ -59,5 +63,6 @@ export {
   initGameProgressContainer,
   renderGameProgress,
   removeGameProgressContainer,
-  putAfterContainer
+  putAfterContainer,
+  hideBodyOverflow
 };

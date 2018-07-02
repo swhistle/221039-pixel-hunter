@@ -14,24 +14,24 @@ export default class LevelType1View extends AbstractView {
         <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
         <form class="game__content">
           <div class="game__option">
-            <img src=${this.level.answers[0].src} alt="Option 1" width="468" height="458">
+            <img src=${this.level.answers[0].image.url} alt="Option 1" width="468" height="458">
             <label class="game__answer game__answer--photo">
               <input name="question1" type="radio" value="photo">
               <span>Фото</span>
             </label>
             <label class="game__answer game__answer--paint">
-              <input name="question1" type="radio" value="paint">
+              <input name="question1" type="radio" value="painting">
               <span>Рисунок</span>
             </label>
           </div>
           <div class="game__option">
-            <img src=${this.level.answers[1].src} alt="Option 2" width="468" height="458">
+            <img src=${this.level.answers[1].image.url} alt="Option 2" width="468" height="458">
             <label class="game__answer  game__answer--photo">
               <input name="question2" type="radio" value="photo">
               <span>Фото</span>
             </label>
             <label class="game__answer  game__answer--paint">
-              <input name="question2" type="radio" value="paint">
+              <input name="question2" type="radio" value="painting">
               <span>Рисунок</span>
             </label>
           </div>
@@ -52,7 +52,7 @@ export default class LevelType1View extends AbstractView {
           if (radio.checked) {
             /* Вычисляем номер изображения, на которм был 'нажат' инпут */
             const indexImage = Math.floor(index / 2);
-            if (radio.value === this.level.answers[indexImage].value) {
+            if (radio.value === this.level.answers[indexImage].type) {
               amountCorrectAnswers++;
             }
           }

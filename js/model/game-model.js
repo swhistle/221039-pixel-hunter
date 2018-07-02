@@ -2,7 +2,6 @@ import {Score} from '../data/game-data';
 import {AMOUNT_LEVELS} from '../data/levels';
 import TimerModel from '../model/timer-model';
 
-/* TODO выпилить время и добавить его в отдельную структуру с таймером */
 const InitialGameData = {
   LIVES: 3,
   SCORES: [],
@@ -71,7 +70,6 @@ export default class GameModel {
     this._gameState.userName = name;
   }
 
-  /* TODO перенести в модель с уровнями */
   getGameProgress() {
     return gameStateObject.scores.map((levelResult) => {
       if (levelResult === Score.WRONG_ANSWER) {
