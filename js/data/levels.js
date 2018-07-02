@@ -15,11 +15,11 @@ const LEVELS = [
     type: TaskType.TWO_PAINTINGS_OR_PHOTOS,
     answers: [
       {
-        src: `https://k42.kn3.net/CF42609C81.jpg`,
+        src: `https://k42.kn3.net/CF42609C8.jpg`,
         value: AnswerType.PAINTING
       },
       {
-        src: `http://i.imgur.com/1KegWPz1.jpg`,
+        src: `http://i.imgur.com/1KegWPz.jpg`,
         value: AnswerType.PHOTO
       }
     ]
@@ -28,7 +28,7 @@ const LEVELS = [
     type: TaskType.PAINTING_OR_PHOTO,
     answers: [
       {
-        src: `https://k42.kn3.net/D2F0370D61.jpg`,
+        src: `https://k42.kn3.net/D2F0370D6.jpg`,
         value: AnswerType.PAINTING
       }
     ]
@@ -37,15 +37,15 @@ const LEVELS = [
     type: TaskType.ONE_PAINTING_OF_THREE_IMAGES,
     answers: [
       {
-        src: `https://k32.kn3.net/5C7060EC51.jpg`,
+        src: `https://k32.kn3.net/5C7060EC5.jpg`,
         value: AnswerType.PAINTING
       },
       {
-        src: `https://i.imgur.com/DiHM5Zb1.jpg`,
+        src: `https://i.imgur.com/DiHM5Zb.jpg`,
         value: AnswerType.PHOTO
       },
       {
-        src: `http://i.imgur.com/1KegWPz1.jpg`,
+        src: `http://i.imgur.com/1KegWPz.jpg`,
         value: AnswerType.PHOTO
       }
     ]
@@ -54,15 +54,15 @@ const LEVELS = [
     type: TaskType.ONE_PAINTING_OF_THREE_IMAGES,
     answers: [
       {
-        src: `https://k42.kn3.net/D2F0370D61.jpg`,
+        src: `https://k42.kn3.net/D2F0370D6.jpg`,
         value: AnswerType.PAINTING
       },
       {
-        src: `http://i.imgur.com/1KegWPz1.jpg`,
+        src: `http://i.imgur.com/1KegWPz.jpg`,
         value: AnswerType.PHOTO
       },
       {
-        src: `http://i.imgur.com/DKR1HtB1.jpg`,
+        src: `http://i.imgur.com/DKR1HtB.jpg`,
         value: AnswerType.PHOTO
       }
     ]
@@ -71,7 +71,7 @@ const LEVELS = [
     type: TaskType.PAINTING_OR_PHOTO,
     answers: [
       {
-        src: `https://k42.kn3.net/CF42609C81.jpg`,
+        src: `https://k42.kn3.net/CF42609C8.jpg`,
         value: AnswerType.PAINTING
       }
     ]
@@ -80,11 +80,11 @@ const LEVELS = [
     type: TaskType.TWO_PAINTINGS_OR_PHOTOS,
     answers: [
       {
-        src: `https://i.imgur.com/DiHM5Zb1.jpg`,
+        src: `https://i.imgur.com/DiHM5Zb.jpg`,
         value: AnswerType.PHOTO
       },
       {
-        src: `http://i.imgur.com/1KegWPz1.jpg`,
+        src: `http://i.imgur.com/1KegWPz.jpg`,
         value: AnswerType.PHOTO
       },
     ]
@@ -93,7 +93,7 @@ const LEVELS = [
     type: TaskType.PAINTING_OR_PHOTO,
     answers: [
       {
-        src: `https://k32.kn3.net/5C7060EC51.jpg`,
+        src: `https://k32.kn3.net/5C7060EC5.jpg`,
         value: AnswerType.PAINTING
       }
     ]
@@ -102,15 +102,15 @@ const LEVELS = [
     type: TaskType.ONE_PAINTING_OF_THREE_IMAGES,
     answers: [
       {
-        src: `https://i.imgur.com/DiHM5Zb1.jpg`,
+        src: `https://i.imgur.com/DiHM5Zb.jpg`,
         value: AnswerType.PHOTO
       },
       {
-        src: `http://i.imgur.com/1KegWPz1.jpg`,
+        src: `http://i.imgur.com/1KegWPz.jpg`,
         value: AnswerType.PHOTO
       },
       {
-        src: `https://k32.kn3.net/5C7060EC51.jpg`,
+        src: `https://k32.kn3.net/5C7060EC5.jpg`,
         value: AnswerType.PAINTING
       }
     ]

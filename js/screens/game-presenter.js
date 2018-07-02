@@ -35,7 +35,7 @@ export default class GamePresenter {
     }
 
     /* Победа в игре и переход к экрану статистики! */
-    if (LEVELS[this.levelIndex].type === null) {
+    if (this.levelIndex === 9) {
       this.timer.stopTimer();
       App.showResult(GameResult.VICTORY);
       return;
