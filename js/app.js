@@ -21,13 +21,13 @@ export default class Application {
     intro.init();
     Application.showScreen(intro.view.element);
 
-    window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
-    then(checkStatus).
-    then((response) => {
-      console.log(response.json());
-      Application.showGreeting();
-    }).
-    catch(Application.showError);
+    window.fetch(`https://es.dump.academy/pixel-hunter/questions`)
+      .then(checkStatus)
+      .then((response) => {
+        response.json();
+        Application.showGreeting();
+      })
+      .catch(Application.showError);
   }
 
   static showGreeting() {

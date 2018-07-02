@@ -19,25 +19,18 @@ export default class GamePresenter {
   }
 
   init() {
-    console.log(LEVELS);
     this.timer.reStartTimer();
     this.timer.startTimer();
     this.timer.levelFailed = () => {
       this.model.answerWrong();
-      App.showGame(LEVELS[this.levelIndex + 1]);
+      App.showGame(this.levelIndex + 1);
     };
+
     /* GAME OVER! */
     if (this.model.getCurrentLives() === 0) {
       /* Выходим из игрового экрана и показываем экран статистики */
       this.timer.stopTimer();
       App.showResult(GameResult.LOSS);
-      return;
-    }
-
-    /* Победа в игре и переход к экрану статистики! */
-    if (this.levelIndex === 9) {
-      this.timer.stopTimer();
-      App.showResult(GameResult.VICTORY);
       return;
     }
 
@@ -52,6 +45,14 @@ export default class GamePresenter {
     }
 
     App.showScreen(this.view.element);
-    this.view.onChangeScreen = () => App.showGame(LEVELS[this.levelIndex + 1]);
+
+    /* Победа в игре и переход к экрану статистики! */
+    if (this.levelIndex === LEVELS.length - 1) {
+      this.timer.stopTimer();
+      this.view.onChangeScreen = () => App.showResult(GameResult.VICTORY);
+      return;
+    }
+
+    this.view.onChangeScreen = () => App.showGame(this.levelIndex + 1);
   }
 }
