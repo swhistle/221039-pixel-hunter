@@ -10,20 +10,21 @@ import App from '../app';
 import {renderGameProgress} from '../functions';
 
 export default class GamePresenter {
-  constructor(level) {
+  constructor(levelIndex) {
     this.model = new GameModel();
-    this.level = level;
+    this.levelIndex = levelIndex;
     this.viewGameProgress = new GameProgressView();
     this.model = new GameModel();
     this.timer = new TimerModel();
   }
 
   init() {
+    console.log(LEVELS);
     this.timer.reStartTimer();
     this.timer.startTimer();
     this.timer.levelFailed = () => {
       this.model.answerWrong();
-      App.showGame(LEVELS[this.level.nextLevel]);
+      App.showGame(LEVELS[this.levelIndex + 1]);
     };
     /* GAME OVER! */
     if (this.model.getCurrentLives() === 0) {
@@ -34,7 +35,7 @@ export default class GamePresenter {
     }
 
     /* Победа в игре и переход к экрану статистики! */
-    if (this.level.type === null) {
+    if (LEVELS[this.levelIndex].type === null) {
       this.timer.stopTimer();
       App.showResult(GameResult.VICTORY);
       return;
@@ -42,15 +43,15 @@ export default class GamePresenter {
 
     renderGameProgress(this.viewGameProgress.element);
 
-    if (this.level.type === TaskType.TWO_PAINTINGS_OR_PHOTOS) {
-      this.view = new LevelType1View(this.level);
-    } else if (this.level.type === TaskType.PAINTING_OR_PHOTO) {
-      this.view = new LevelType2View(this.level);
-    } else if (this.level.type === TaskType.ONE_PAINTING_OF_THREE_IMAGES) {
-      this.view = new LevelType3View(this.level);
+    if (LEVELS[this.levelIndex].type === TaskType.TWO_PAINTINGS_OR_PHOTOS) {
+      this.view = new LevelType1View(LEVELS[this.levelIndex]);
+    } else if (LEVELS[this.levelIndex].type === TaskType.PAINTING_OR_PHOTO) {
+      this.view = new LevelType2View(LEVELS[this.levelIndex]);
+    } else if (LEVELS[this.levelIndex].type === TaskType.ONE_PAINTING_OF_THREE_IMAGES) {
+      this.view = new LevelType3View(LEVELS[this.levelIndex]);
     }
 
     App.showScreen(this.view.element);
-    this.view.onChangeScreen = () => App.showGame(LEVELS[this.level.nextLevel]);
+    this.view.onChangeScreen = () => App.showGame(LEVELS[this.levelIndex + 1]);
   }
 }

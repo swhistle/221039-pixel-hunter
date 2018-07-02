@@ -23,7 +23,10 @@ export default class Application {
 
     window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
     then(checkStatus).
-    then(Application.showGreeting).
+    then((response) => {
+      console.log(response.json());
+      Application.showGreeting();
+    }).
     catch(Application.showError);
   }
 
@@ -39,8 +42,8 @@ export default class Application {
     Application.showScreen(rules.view.element);
   }
 
-  static showGame(level) {
-    const game = new GamePresenter(level);
+  static showGame(levelIndex) {
+    const game = new GamePresenter(levelIndex);
     game.init();
   }
 

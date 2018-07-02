@@ -1,7 +1,6 @@
 import RulesView from '../view/rules-view';
 import ButtonBackView from '../view/button-back-view';
 import GameModel from '../model/game-model';
-import {LEVELS} from '../data/levels';
 import App from '../app';
 import {renderHeader, initGameStateContainer, initGameProgressContainer} from "../functions";
 
@@ -18,7 +17,7 @@ export default class RulesPresenter {
     initGameProgressContainer();
     this.view.onChangeScreen = () => {
       this.model.startNewGame(this.view.name);
-      App.showGame(LEVELS[`level-1`]);
+      App.showGame(0);
     };
 
     this.buttonBackView.onChangeScreen = App.showGreeting;
