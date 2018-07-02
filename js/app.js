@@ -4,7 +4,7 @@ import RulesPresenter from './screens/rules-presenter';
 import GamePresenter from './screens/game-presenter';
 import ResultPresenter from './screens/result-presenter';
 import ErrorView from './view/error-view';
-import {putAfterContainer, hiddenBodyOverflow} from './functions';
+import {putAfterContainer, hideBodyOverflow} from './functions';
 
 let questions;
 
@@ -58,7 +58,7 @@ export default class Application {
   static showError() {
     const error = new ErrorView();
     putAfterContainer(error.element);
-    hiddenBodyOverflow();
+    hideBodyOverflow();
   }
 
   static showScreen(screen) {
