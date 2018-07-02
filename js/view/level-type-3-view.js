@@ -15,13 +15,13 @@ export default class LevelType3View extends AbstractView {
           <p class="game__task">Найдите рисунок среди изображений</p>
           <form class="game__content  game__content--triple">
             <div class="game__option">
-              <img src=${this.level.answers[0].src} alt="Option 1" width="304" height="455">
+              <img src=${this.level.answers[0].image.url} alt="Option 1" width="304" height="455">
             </div>
             <div class="game__option  game__option--selected">
-              <img src=${this.level.answers[1].src} alt="Option 1" width="304" height="455">
+              <img src=${this.level.answers[1].image.url} alt="Option 1" width="304" height="455">
             </div>
             <div class="game__option">
-              <img src=${this.level.answers[2].src} alt="Option 1" width="304" height="455">
+              <img src=${this.level.answers[2].image.url} alt="Option 1" width="304" height="455">
             </div>
           </form>
         </div>
@@ -33,7 +33,7 @@ export default class LevelType3View extends AbstractView {
 
     answers.forEach((item, index) => {
       item.addEventListener(`click`, () => {
-        if (this.level.answers[index].value === AnswerType.PAINTING) {
+        if (this.level.answers[index].type === AnswerType.PAINTING) {
           this.model.answerCorrectly();
         } else {
           this.model.answerWrong();

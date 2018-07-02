@@ -6,6 +6,8 @@ import ResultPresenter from './screens/result-presenter';
 import ErrorView from './view/error-view';
 import {putAfterContainer, hiddenBodyOverflow} from './functions';
 
+let questions;
+
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -24,7 +26,7 @@ export default class Application {
     window.fetch(`https://es.dump.academy/pixel-hunter/questions`)
       .then(checkStatus)
       .then((response) => {
-        response.json();
+        questions = response.json();
         Application.showGreeting();
       })
       .catch(Application.showError);
@@ -63,5 +65,9 @@ export default class Application {
     const container = document.querySelector(`.central`);
     container.innerHTML = ``;
     container.appendChild(screen);
+  }
+
+  static getQuestions() {
+    return questions;
   }
 }
