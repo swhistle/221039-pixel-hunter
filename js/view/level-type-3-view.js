@@ -1,11 +1,12 @@
 import AbstractView from './abstract-view';
+import GameModel from '../model/game-model';
 import {AnswerType} from '../data/levels';
-import {answerCorrectly, answerWrong} from "../data/game-data";
 
 export default class LevelType3View extends AbstractView {
   constructor(level) {
     super();
     this.level = level;
+    this.model = new GameModel();
   }
 
   get template() {
@@ -33,9 +34,9 @@ export default class LevelType3View extends AbstractView {
     answers.forEach((item, index) => {
       item.addEventListener(`click`, () => {
         if (this.level.answers[index].value === AnswerType.PAINTING) {
-          answerCorrectly();
+          this.model.answerCorrectly();
         } else {
-          answerWrong();
+          this.model.answerWrong();
         }
         this.onChangeScreen();
       });

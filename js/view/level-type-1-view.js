@@ -1,9 +1,10 @@
 import AbstractView from './abstract-view';
-import {answerCorrectly, answerWrong} from "../data/game-data";
+import GameModel from '../model/game-model';
 
 export default class LevelType1View extends AbstractView {
   constructor(level) {
     super();
+    this.model = new GameModel();
     this.level = level;
   }
 
@@ -49,7 +50,7 @@ export default class LevelType1View extends AbstractView {
         answers.forEach((radio, index) => {
           amountAnswers = amountAnswers + +radio.checked;
           if (radio.checked) {
-            /** Вычисляем номер изображения, на которм был 'нажат' инпут **/
+            /* Вычисляем номер изображения, на которм был 'нажат' инпут */
             const indexImage = Math.floor(index / 2);
             if (radio.value === this.level.answers[indexImage].value) {
               amountCorrectAnswers++;
@@ -58,9 +59,9 @@ export default class LevelType1View extends AbstractView {
 
           if (amountAnswers > 1) {
             if (amountCorrectAnswers > 1) {
-              answerCorrectly();
+              this.model.answerCorrectly();
             } else {
-              answerWrong();
+              this.model.answerWrong();
             }
             amountAnswers = 0;
             amountCorrectAnswers = 0;

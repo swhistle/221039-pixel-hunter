@@ -1,9 +1,10 @@
 import AbstractView from './abstract-view';
-import {answerCorrectly, answerWrong} from "../data/game-data";
+import GameModel from '../model/game-model';
 
 export default class LevelType2View extends AbstractView {
   constructor(level) {
     super();
+    this.model = new GameModel();
     this.level = level;
   }
 
@@ -35,9 +36,9 @@ export default class LevelType2View extends AbstractView {
       radio.addEventListener(`change`, () => {
         if (radio.checked) {
           if (radio.value === this.level.answers[0].value) {
-            answerCorrectly();
+            this.model.answerCorrectly();
           } else {
-            answerWrong();
+            this.model.answerWrong();
           }
           this.onChangeScreen();
         }

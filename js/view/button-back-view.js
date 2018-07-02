@@ -17,7 +17,10 @@ export default class ButtonBackView extends AbstractView {
   }
 
   bind() {
-
+    this.element.addEventListener(`click`, () => {
+      /* TODO добавить confirm */
+      this.onChangeScreen();
+    });
   }
 
   onChangeScreen() {}

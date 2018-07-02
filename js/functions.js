@@ -1,13 +1,7 @@
-const getElementFromTemplate = (content) => {
-  const elem = document.createElement(`div`);
-  elem.innerHTML = content;
-  return elem;
-};
-
 const container = document.querySelector(`.central`);
+const header = document.querySelector(`.header`);
 
 const renderHeader = (element) => {
-  const header = document.querySelector(`.header`);
   header.innerHTML = ``;
   if (element === undefined) {
     return;
@@ -16,7 +10,6 @@ const renderHeader = (element) => {
 };
 
 const initGameStateContainer = () => {
-  const header = document.querySelector(`.header`);
   const headerGameStateContainer = document.createElement(`div`);
   headerGameStateContainer.classList.add(`header-game-state`);
   header.appendChild(headerGameStateContainer);
@@ -54,18 +47,11 @@ const removeGameProgressContainer = () => {
   }
 };
 
-const showScreen = (screen) => {
-  container.innerHTML = ``;
-  container.appendChild(screen);
-};
-
 const putAfterContainer = (element) => {
   container.after(element);
 };
 
 export {
-  getElementFromTemplate,
-  showScreen,
   renderHeader,
   initGameStateContainer,
   renderGameState,
@@ -73,6 +59,5 @@ export {
   initGameProgressContainer,
   renderGameProgress,
   removeGameProgressContainer,
-  container,
   putAfterContainer
 };

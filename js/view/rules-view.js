@@ -1,21 +1,25 @@
 import AbstractView from './abstract-view';
-import {Rules} from "../data/game-data";
+import GameModel from '../model/game-model';
+import TimerModel from '../model/timer-model';
+import {AMOUNT_LEVELS} from "../data/levels";
 
 export default class RulesView extends AbstractView {
   constructor() {
     super();
+    this.model = new GameModel();
+    this.timer = new TimerModel();
   }
 
   get template() {
     return `
       <div class="rules">
       <h1 class="rules__title">Правила</h1>
-      <p class="rules__description">Угадай ${Rules.LEVELS} раз для каждого изображения фото <img
+      <p class="rules__description">Угадай ${AMOUNT_LEVELS} раз для каждого изображения фото <img
         src="img/photo_icon.png" width="16" height="16"> или рисунок <img
         src="img/paint_icon.png" width="16" height="16" alt="">.<br>
         Фотографиями или рисунками могут быть оба изображения.<br>
-        На каждую попытку отводится ${Rules.LEVEL_DURATION} секунд.<br>
-        Ошибиться можно не более ${Rules.ROOM_TO_FAIL} раз.<br>
+        На каждую попытку отводится ${this.timer.getInitialTime()} секунд.<br>
+        Ошибиться можно не более ${this.model.getInitialLives()} раз.<br>
         <br>
         Готовы?
       </p>
@@ -33,6 +37,7 @@ export default class RulesView extends AbstractView {
     const form = this.element.querySelector(`.rules__form`);
 
     input.addEventListener(`input`, () => {
+      this.name = input.value.trim();
       link.disabled = !input.value.trim().length;
     });
 
