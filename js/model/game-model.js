@@ -70,6 +70,10 @@ export default class GameModel {
     this._gameState.userName = name;
   }
 
+  getUserName() {
+    return this._gameState.userName;
+  }
+
   getGameProgress() {
     return gameStateObject.scores.map((levelResult) => {
       if (levelResult === Score.WRONG_ANSWER) {
