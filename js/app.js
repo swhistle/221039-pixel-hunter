@@ -7,7 +7,7 @@ import ErrorView from './view/error-view';
 import GameModel from './model/game-model';
 import {putAfterContainer, hideBodyOverflow} from './functions';
 
-const SERVER_URL = `https://es.dump.academy/pixel-hunter/`;
+const SERVER_URL = `https://es.dump.academy/pixel-hunter`;
 
 const DEFAULT_NAME = `hunter`;
 const APP_ID = 2405506632;
@@ -63,7 +63,7 @@ export default class Application {
     Application.showScreen(gameResult.view.element);
     Application.saveResults(state, playerName)
       .then(() => Application.loadResults(playerName))
-      .then((data) => gameResult.showStats(data, playerName))
+      .then((data) => gameResult.showStats(data))
       .catch(Application.showError);
   }
 

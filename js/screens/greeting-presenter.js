@@ -1,7 +1,7 @@
 import GreetingView from '../view/greeting-view';
 import App from '../app';
 import TimerModel from '../model/timer-model';
-import {renderHeader, removeGameProgressContainer} from "../functions";
+import {renderHeader, removeGameProgressContainer, removeStatisticContainer} from "../functions";
 
 export default class GreetingPresenter {
   constructor() {
@@ -13,6 +13,7 @@ export default class GreetingPresenter {
     this.timer.stopTimer();
     renderHeader();
     removeGameProgressContainer();
+    removeStatisticContainer();
     this.view.onChangeScreen = App.showRules;
   }
 }

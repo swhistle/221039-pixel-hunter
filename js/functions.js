@@ -31,7 +31,7 @@ const removeGameStateContainer = () => {
 const initGameProgressContainer = () => {
   const gameProgressContainer = document.createElement(`div`);
   gameProgressContainer.classList.add(`stats`);
-  container.after(gameProgressContainer);
+  putAfterContainer(gameProgressContainer);
 };
 
 const renderGameProgress = (gameProgress) => {
@@ -44,6 +44,24 @@ const removeGameProgressContainer = () => {
   const progressContainer = document.querySelector(`.stats`);
   if (progressContainer) {
     progressContainer.remove();
+  }
+};
+
+const initStatisticContainer = () => {
+  const statisticContainer = document.createElement(`div`);
+  statisticContainer.classList.add(`statistic`);
+  putAfterContainer(statisticContainer);
+};
+
+const renderStatisticContainer = (element) => {
+  const statisticContainer = document.querySelector(`.statistic`);
+  statisticContainer.appendChild(element);
+};
+
+const removeStatisticContainer = () => {
+  const statisticContainer = document.querySelector(`.statistic`);
+  if (statisticContainer) {
+    statisticContainer.remove();
   }
 };
 
@@ -64,5 +82,8 @@ export {
   renderGameProgress,
   removeGameProgressContainer,
   putAfterContainer,
-  hideBodyOverflow
+  hideBodyOverflow,
+  initStatisticContainer,
+  renderStatisticContainer,
+  removeStatisticContainer
 };
