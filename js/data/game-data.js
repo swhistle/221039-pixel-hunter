@@ -24,9 +24,9 @@ const calculateScoredPoints = (arrayScores, lives) => {
     return sumArray(arrayScores);
   } else if (arrayScores === undefined) {
     return lives * Score.REMAINING_LIVES;
-  } else {
-    return null;
   }
+
+  return null;
 };
 
 export {

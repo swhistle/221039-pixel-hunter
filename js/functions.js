@@ -65,6 +65,13 @@ const removeStatisticContainer = () => {
   }
 };
 
+const removeModalConfirm = () => {
+  const modalConfirm = document.querySelector(`.modal-confirm`);
+  if (modalConfirm) {
+    modalConfirm.parentNode.remove();
+  }
+};
+
 const putAfterContainer = (element) => {
   container.after(element);
 };
@@ -85,5 +92,6 @@ export {
   hideBodyOverflow,
   initStatisticContainer,
   renderStatisticContainer,
-  removeStatisticContainer
+  removeStatisticContainer,
+  removeModalConfirm
 };

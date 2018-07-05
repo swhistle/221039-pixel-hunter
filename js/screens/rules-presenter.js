@@ -1,18 +1,20 @@
 import RulesView from '../view/rules-view';
 import ButtonBackView from '../view/button-back-view';
+import ConfirmDialogView from '../view/confirm-dialog-view';
 import GameModel from '../model/game-model';
 import App from '../app';
-import {renderHeader, initGameStateContainer, initGameProgressContainer} from "../functions";
+import {renderHeader, initGameStateContainer, initGameProgressContainer, putAfterContainer, removeModalConfirm} from '../functions';
 
 export default class RulesPresenter {
   constructor() {
     this.model = new GameModel();
     this.view = new RulesView();
-    this.buttonBackView = new ButtonBackView();
+    this.viewButtonBack = new ButtonBackView();
+    this.viewConfirmDialog = new ConfirmDialogView();
   }
 
   init() {
-    renderHeader(this.buttonBackView.element);
+    renderHeader(this.viewButtonBack.element);
     initGameStateContainer();
     initGameProgressContainer();
     this.view.onChangeScreen = () => {
@@ -20,6 +22,29 @@ export default class RulesPresenter {
       App.showGame(0);
     };
 
-    this.buttonBackView.onChangeScreen = App.showGreeting;
+    this.viewButtonBack.onGoBack = () => {
+      let confirm = document.querySelector(`.modal-confirm`);
+
+      if (!confirm) {
+        putAfterContainer(this.viewConfirmDialog.element);
+
+        this.viewConfirmDialog.onConfirm = () => {
+          App.showGreeting();
+          removeModalConfirm();
+          confirm = null;
+        };
+
+        this.viewConfirmDialog.onCancel = () => {
+          removeModalConfirm();
+          confirm = null;
+        };
+
+        this.viewConfirmDialog.onClose = () => {
+          removeModalConfirm();
+          confirm = null;
+        };
+      }
+
+    };
   }
 }

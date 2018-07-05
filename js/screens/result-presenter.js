@@ -24,6 +24,8 @@ export default class ResultPresenter {
       this.view = new ResultView();
     } else if (this.result === GameResult.LOSS || this.model.getCurrentLives() === 0) {
       this.view = new LossView();
+    } else {
+      return;
     }
   }
 
@@ -55,6 +57,7 @@ export default class ResultPresenter {
         } else if (score === Score.FAST_ANSWER) {
           return `<li class="stats__result stats__result--fast"></li>`;
         }
+
         return null;
       }).join(``);
       const remainingLevels = new Array(AMOUNT_LEVELS - gameState.scores.length).fill(`<li class="stats__result stats__result--unknown"></li>`).join(``);

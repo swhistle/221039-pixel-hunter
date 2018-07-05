@@ -85,6 +85,7 @@ export default class GameModel {
       } else if (levelResult === Score.FAST_ANSWER) {
         return `<li class="stats__result stats__result--fast"></li>`;
       }
+
       return null;
     }).join(``);
   }
